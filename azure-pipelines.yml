@@ -1,9 +1,9 @@
 variables:
   buildDEPS: false
   downloadDEPS: true
-  buildWeb: true
-  buildMac: true
-  buildWin: false
+  buildWeb: false
+  buildMac: false
+  buildWin: true
   # buildInstallers: false #if true, the mac/win projects will build installers, rather than packaging individual binaries
   configuration: 'Release'
   target: 'All'
@@ -260,6 +260,41 @@ jobs:
   - template: Scripts/azure-projectlist.yml
     parameters:
       platform: azure-project-mac.yml
+      graphics: $(graphics)
+
+- job: BUILD_WIN_PROJECTS
+  condition: and(eq(variables.buildDEPS, false), eq(variables.buildWin, true))
+  dependsOn: DOWNLOAD_DEPS
+
+  strategy:
+    matrix:
+      NANOVG:
+        graphics: 'NANOVG'
+      CAIRO:
+        graphics: 'CAIRO'
+      LICE:
+        graphics: 'LICE'
+      AGG:
+        graphics: 'AGG'
+
+  pool:
+    vmImage: 'vs2017-win2016'
+
+  steps:
+  - checkout: none
+
+  - template: Scripts/azure-getsrc.yml
+
+  - task: VSBuild@1
+    inputs:
+      solution: 'Dependencies/IPlug/AAX_SDK/Libs/AAXLibrary/WinBuild/vs2017/AAXLibrary.sln'
+      vsVersion: '15'
+      platform: x64
+      configuration: '${{ parameters.configuration }}'
+
+  - template: Scripts/azure-projectlist.yml
+    parameters:
+      platform: azure-project-win.yml
       graphics: $(graphics)
 
 - job: BUILD_WEB_PROJECTS
