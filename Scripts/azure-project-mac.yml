@@ -41,7 +41,7 @@ steps:
   #     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-mac/PCH
   #   displayName: Delete unwanted files
 
-  - ${{ if eq(${{ parameters.graphics }}, 'AGG') }}:
+  - ${{ if eq(parameters.graphics, 'AGG') }}:
     - bash: |
         echo "AGG!!!"
       displayName: Conditional thing

@@ -21,7 +21,7 @@ steps:
   #     ./makedist-web.sh off
   #   displayName: Compile ${{ parameters.name }} WAM
 
-  - ${{ if eq(${{ parameters.graphics }}, 'CANVAS') }}:
+  - ${{ if eq(parameters.graphics, 'CANVAS') }}:
     - bash: |
         echo "CANVAS!!!"
       displayName: Conditional thing
