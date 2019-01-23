@@ -133,7 +133,7 @@ jobs:
   steps:
   - checkout: none
 
-  - template: Scripts/azure-src.yml
+  # - template: Scripts/azure-getsrc.yml
 
   - task: VSBuild@1
     inputs:
@@ -201,7 +201,7 @@ jobs:
   steps:
   - checkout: none
 
-  - template: Scripts/azure-src.yml
+  # - template: Scripts/azure-getsrc.yml
 
   - bash: |
       #tmp force cairo rebuild
@@ -236,8 +236,8 @@ jobs:
 
 - job: BUILD_MAC_PROJECTS
   condition: and(eq(variables.buildDEPS, false), eq(variables.buildMac, true))
-
   dependsOn: DOWNLOAD_DEPS
+
   strategy:
     matrix:
       NANOVG:
@@ -255,7 +255,7 @@ jobs:
   steps:
   - checkout: none
 
-  # - template: Scripts/azure-src.yml
+  # - template: Scripts/azure-getsrc.yml
 
   - template: Scripts/azure-projectlist.yml
     parameters:
@@ -264,8 +264,8 @@ jobs:
 
 - job: BUILD_WEB_PROJECTS
   condition: and(eq(variables.buildDEPS, false), eq(variables.buildWeb, true))
-
   dependsOn: DOWNLOAD_DEPS
+
   strategy:
     matrix:
       NANOVG:
@@ -286,7 +286,7 @@ jobs:
   #     ./emsdk activate latest
   #   displayName: Install emscripten
 
-  # - template: Scripts/azure-src.yml
+  # - template: Scripts/azure-getsrc.yml
 
   - template: Scripts/azure-projectlist.yml
     parameters:
