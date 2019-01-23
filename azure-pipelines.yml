@@ -288,9 +288,10 @@ jobs:
   - task: VSBuild@1
     inputs:
       solution: 'Dependencies/IPlug/AAX_SDK/Libs/AAXLibrary/WinBuild/vs2017/AAXLibrary.sln'
-      vsVersion: '15'
+      vsVersion: '15.0'
       platform: x64
       configuration: '${{ parameters.configuration }}'
+    displayName: Compile AAX Library Visual Studio Solution
 
   - template: Scripts/azure-projectlist.yml
     parameters:

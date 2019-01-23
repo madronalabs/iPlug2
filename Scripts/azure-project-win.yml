@@ -26,14 +26,14 @@ steps:
   - task: VSBuild@1
     inputs:
       solution: '${{ parameters.path }}/${{ parameters.name }}/${{ parameters.name }}.sln'
-      vsVersion: '15'
+      vsVersion: '15.0'
       platform: x64
       configuration: '${{ parameters.configuration }}'
     displayName: Compile Visual Studio Solution
 
-  # - bash: |
-  #     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*.build
-  #   displayName: Delete unwanted files
+  - bash: |
+      cp ${{ parameters.path }}/${{ parameters.name }}/build-win/*/*/bin
+    displayName: Delete unwanted files
 
   # - bash: |
   #     mkdir -p ${{ parameters.path }}/${{ parameters.name }}/build-win/
