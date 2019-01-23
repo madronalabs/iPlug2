@@ -10,7 +10,7 @@ steps:
       path: 'Examples'
       graphics: ${{parameters.graphics}}
       target: ${{parameters.target}}
-      artifactName: 'HELLO'
+      artifactName: ${{parameters.graphics}}
 
   # - template: ${{parameters.platform}}
   #   parameters:
