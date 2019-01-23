@@ -22,8 +22,8 @@ steps:
   #   displayName: Compile ${{ parameters.name }} WAM
 
   - bash: |
-    graphics=${{ parameters.graphics }}
-    echo $graphics
+      graphics=${{ parameters.graphics }}
+      echo $graphics
     displayName: Conditional thing
 
   - bash: |

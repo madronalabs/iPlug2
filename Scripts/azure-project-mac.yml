@@ -42,10 +42,10 @@ steps:
   #   displayName: Delete unwanted files
 
   - bash: |
-    graphics=${{ parameters.graphics }}
-    echo $graphics
+      graphics=${{ parameters.graphics }}
+      echo $graphics
     displayName: Conditional thing
-    
+
   - bash: |
       mkdir -p ${{ parameters.path }}/${{ parameters.name }}/build-mac/
       echo "hello ${{ parameters.graphics }}" > ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.graphics }}.txt
