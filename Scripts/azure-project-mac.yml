@@ -14,35 +14,37 @@ steps:
         sed -i.bu 's/IGRAPHICS_NANOVG IGRAPHICS_METAL/IGRAPHICS_LICE/' ${{ parameters.name }}-mac.xcconfig
         sed -i.bu 's/\/\/$(IGRAPHICS_LNK_FLAGS)/$(IGRAPHICS_LNK_FLAGS)/' ${{ parameters.name }}-mac.xcconfig
       elif [ $graphics = "CAIRO" ]
+      then
         cd ./${{ parameters.path }}/${{ parameters.name }}/config
         sed -i.bu 's/IGRAPHICS_NANOVG IGRAPHICS_METAL/IGRAPHICS_CAIRO/' ${{ parameters.name }}-mac.xcconfig
         sed -i.bu 's/\/\/$(IGRAPHICS_LNK_FLAGS)/$(IGRAPHICS_LNK_FLAGS)/' ${{ parameters.name }}-mac.xcconfig
       elif [ $graphics = "AGG" ]
+      then
         cd ./${{ parameters.path }}/${{ parameters.name }}/config
         sed -i.bu 's/IGRAPHICS_NANOVG IGRAPHICS_METAL/IGRAPHICS_AGG/' ${{ parameters.name }}-mac.xcconfig
         sed -i.bu 's/\/\/$(IGRAPHICS_LNK_FLAGS)/$(IGRAPHICS_LNK_FLAGS)/' ${{ parameters.name }}-mac.xcconfig
       fi
     displayName: Set graphics string
 
-  # - task: Xcode@5
-  #   inputs:
-  #     sdk: 'macosx10.13'
-  #     xcWorkspacePath: '${{ parameters.path }}/${{ parameters.name }}/projects/${{ parameters.name }}-macOS.xcodeproj'
-  #     args: '-target ${{ parameters.target }} -xcconfig ${{ parameters.path }}/${{ parameters.name }}/config/${{ parameters.name }}-mac.xcconfig'
-  #     configuration: '${{ parameters.configuration }}'
-  #     xcodeVersion: '9'
-  #   displayName: Build Xcode project
-
-  # - bash: |
-  #     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-mac/*.build
-  #     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-mac/PCH
-  #   displayName: Delete unwanted files
+  - task: Xcode@5
+    inputs:
+      sdk: 'macosx10.13'
+      xcWorkspacePath: '${{ parameters.path }}/${{ parameters.name }}/projects/${{ parameters.name }}-macOS.xcodeproj'
+      args: '-target ${{ parameters.target }} -xcconfig ${{ parameters.path }}/${{ parameters.name }}/config/${{ parameters.name }}-mac.xcconfig'
+      configuration: '${{ parameters.configuration }}'
+      xcodeVersion: '9'
+    displayName: Build Xcode project
 
   - bash: |
-      mkdir -p ${{ parameters.path }}/${{ parameters.name }}/build-mac/
-      echo "hello ${{ parameters.graphics }}" > ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.graphics }}.txt
+      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-mac/*.build
+      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-mac/PCH
+    displayName: Delete unwanted files
 
-    displayName: TEST PAYLOAD
+  # - bash: |
+  #     mkdir -p ${{ parameters.path }}/${{ parameters.name }}/build-mac/
+  #     echo "hello ${{ parameters.graphics }}" > ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.graphics }}.txt
+
+  #   displayName: TEST PAYLOAD
 
   - task: PublishPipelineArtifact@0
     inputs:

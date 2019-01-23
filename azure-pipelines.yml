@@ -3,7 +3,7 @@ variables:
   downloadDEPS: false
   buildWeb: true
   buildMac: true
-  buildWin: true
+  buildWin: false
   # buildInstallers: false #if true, the mac/win projects will build installers, rather than packaging individual binaries
   configuration: 'Release'
   target: 'All'
@@ -133,7 +133,7 @@ jobs:
   steps:
   - checkout: none
 
-  # - template: Scripts/azure-getsrc.yml
+  - template: Scripts/azure-getsrc.yml
 
   - task: VSBuild@1
     inputs:
@@ -201,7 +201,7 @@ jobs:
   steps:
   - checkout: none
 
-  # - template: Scripts/azure-getsrc.yml
+  - template: Scripts/azure-getsrc.yml
 
   - bash: |
       #tmp force cairo rebuild
@@ -255,7 +255,7 @@ jobs:
   steps:
   - checkout: none
 
-  # - template: Scripts/azure-getsrc.yml
+  - template: Scripts/azure-getsrc.yml
 
   - template: Scripts/azure-projectlist.yml
     parameters:
@@ -279,14 +279,14 @@ jobs:
   steps:
   - checkout: none
 
-  # - bash: |
-  #     git clone https://github.com/emscripten-core/emsdk.git
-  #     cd emsdk
-  #     ./emsdk install latest
-  #     ./emsdk activate latest
-  #   displayName: Install emscripten
+  - bash: |
+      git clone https://github.com/emscripten-core/emsdk.git
+      cd emsdk
+      ./emsdk install latest
+      ./emsdk activate latest
+    displayName: Install emscripten
 
-  # - template: Scripts/azure-getsrc.yml
+  - template: Scripts/azure-getsrc.yml
 
   - template: Scripts/azure-projectlist.yml
     parameters:
