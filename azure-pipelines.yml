@@ -260,7 +260,7 @@ jobs:
   - template: Scripts/azure-projectlist.yml
     parameters:
       platform: azure-project-mac.yml
-      graphics: variables.graphics
+      graphics: $(graphics)
 
 - job: BUILD_WEB_PROJECTS
   condition: and(eq(variables.buildDEPS, false), eq(variables.buildWeb, true))
@@ -291,4 +291,4 @@ jobs:
   - template: Scripts/azure-projectlist.yml
     parameters:
       platform: azure-project-web.yml
-      graphics: variables.graphics
+      graphics: $(graphics)
