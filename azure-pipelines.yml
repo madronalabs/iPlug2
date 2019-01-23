@@ -1,6 +1,6 @@
 variables:
   buildDEPS: false
-  downloadDEPS: false
+  downloadDEPS: true
   buildWeb: true
   buildMac: true
   buildWin: false
