@@ -41,11 +41,11 @@ steps:
   #     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-mac/PCH
   #   displayName: Delete unwanted files
 
-  - ${{ if eq(parameters.graphics, 'AGG') }}:
-    - bash: |
-        echo "AGG!!!"
-      displayName: Conditional thing
-
+  - bash: |
+    graphics=${{ parameters.graphics }}
+    echo $graphics
+    displayName: Conditional thing
+    
   - bash: |
       mkdir -p ${{ parameters.path }}/${{ parameters.name }}/build-mac/
       echo "hello ${{ parameters.graphics }}" > ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.graphics }}.txt

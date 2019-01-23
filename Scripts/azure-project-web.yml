@@ -21,10 +21,10 @@ steps:
   #     ./makedist-web.sh off
   #   displayName: Compile ${{ parameters.name }} WAM
 
-  - ${{ if eq(parameters.graphics, 'CANVAS') }}:
-    - bash: |
-        echo "CANVAS!!!"
-      displayName: Conditional thing
+  - bash: |
+    graphics=${{ parameters.graphics }}
+    echo $graphics
+    displayName: Conditional thing
 
   - bash: |
       mkdir -p ${{ parameters.path }}/${{ parameters.name }}/build-web/
