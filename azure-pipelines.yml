@@ -9,7 +9,7 @@ variables:
   target: 'All'
 
 trigger:
-- none
+- azure-pipelines
 
 jobs:
 
