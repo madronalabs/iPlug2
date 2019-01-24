@@ -215,7 +215,7 @@ jobs:
 
   - bash: |
       mkdir -p ./Dependencies/IPlug/AAX_SDK
-      mv $AGENT_TEMPDIRECTORY/AAX_SDK/* ./Dependencies/IPlug/AAX_SDK
+      mv $AGENT_TEMPDIRECTORY/* ./Dependencies/IPlug/AAX_SDK
 
   - task: VSBuild@1
     inputs:
