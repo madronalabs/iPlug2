@@ -211,9 +211,9 @@ jobs:
       archiveFilePatterns: '$(Agent.TempDirectory)/*.zip'
       destinationFolder: '$(Agent.TempDirectory)'
       cleanDestinationFolder: false
-    condition: eq(variables.buildDEPS, false)
 
   - bash: |
+      ls -l $AGENT_TEMPDIRECTORY
       mkdir -p ./Dependencies/IPlug/AAX_SDK
       mv $AGENT_TEMPDIRECTORY/* ./Dependencies/IPlug/AAX_SDK
 
