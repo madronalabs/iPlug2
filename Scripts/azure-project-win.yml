@@ -29,11 +29,19 @@ steps:
       vsVersion: '15.0'
       platform: x64
       configuration: '${{ parameters.configuration }}'
-    displayName: Compile Visual Studio Solution
+    displayName: Compile Visual Studio Solution x64
 
-  - bash: |
-      cp ${{ parameters.path }}/${{ parameters.name }}/build-win/*/*/bin
-    displayName: Delete unwanted files
+  # - task: VSBuild@1
+  #   inputs:
+  #     solution: '${{ parameters.path }}/${{ parameters.name }}/${{ parameters.name }}.sln'
+  #     vsVersion: '15.0'
+  #     platform: Win32
+  #     configuration: '${{ parameters.configuration }}'
+  #   displayName: Compile Visual Studio Solution Win32
+
+#  - bash: |
+#      cp ${{ parameters.path }}/${{ parameters.name }}/build-win/*/*/bin
+#    displayName: Delete unwanted files
 
   # - bash: |
   #     mkdir -p ${{ parameters.path }}/${{ parameters.name }}/build-win/

@@ -192,6 +192,40 @@ jobs:
       targetPath: 'Dependencies/Build/'
     displayName: Publish Windows Dependencies Artifacts
 
+- job: BUILD_WIN_AAX_LIBS
+  condition: and(eq(variables.buildDEPS, false), eq(variables.buildWin, true))
+
+- bash: |
+    mkdir -p ./Dependencies/IPlug/
+  displayName: Make Folder Structure
+
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: "AAX_SDK.zip"
+  displayName: Download AAX SDK
+
+- task: VSBuild@1
+  inputs:
+    solution: 'Dependencies/IPlug/AAX_SDK/Libs/AAXLibrary/WinBuild/vs2017/AAXLibrary.sln'
+    vsVersion: '15.0'
+    platform: x64
+    configuration: '$configuration'
+  displayName: Compile AAX Library Visual Studio Solution x64
+
+- task: VSBuild@1
+  inputs:
+    solution: 'Dependencies/IPlug/AAX_SDK/Libs/AAXLibrary/WinBuild/vs2017/AAXLibrary.sln'
+    vsVersion: '15.0'
+    platform: Win32
+    configuration: '$configuration'
+  displayName: Compile AAX Library Visual Studio Solution Win32
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'DEPS_AAX_LIB_WIN'
+    targetPath: 'Dependencies/IPlug/AAX_SDK/Libs/'
+  displayName: Publish Windows AAX Libs
+
 - job: BUILD_MAC_DEPS
   dependsOn: DOWNLOAD_DEPS
   condition: and(eq(variables.buildDEPS, true), eq(variables.buildMac, true))
@@ -264,7 +298,9 @@ jobs:
 
 - job: BUILD_WIN_PROJECTS
   condition: and(eq(variables.buildDEPS, false), eq(variables.buildWin, true))
-  dependsOn: DOWNLOAD_DEPS
+  dependsOn: 
+    - DOWNLOAD_DEPS
+    - BUILD_WIN_AAX_LIBS
 
   strategy:
     matrix:
@@ -285,13 +321,15 @@ jobs:
 
   - template: Scripts/azure-getsrc.yml
 
-  - task: VSBuild@1
+  - task: DownloadPipelineArtifact@0
     inputs:
-      solution: 'Dependencies/IPlug/AAX_SDK/Libs/AAXLibrary/WinBuild/vs2017/AAXLibrary.sln'
-      vsVersion: '15.0'
-      platform: x64
-      configuration: '${{ parameters.configuration }}'
-    displayName: Compile AAX Library Visual Studio Solution
+      artifactName: 'DEPS_AAX_LIB_WIN'
+
+  - task: ExtractFiles@1
+    inputs:
+      archiveFilePatterns: 'DEPS_AAX_LIB_WIN.zip'
+      cleanDestinationFolder: false
+      destinationFolder: $(Build.SourcesDirectory)
 
   - template: Scripts/azure-projectlist.yml
     parameters:
