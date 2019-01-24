@@ -209,10 +209,16 @@ jobs:
   - task: ExtractFiles@1
     inputs:
       archiveFilePatterns: '$(Agent.TempDirectory)/AAX_SDK.zip'
-      destinationFolder: 'Dependencies/IPlug/AAX_SDK'
+      destinationFolder: 'Dependencies/IPlug/AAX_SDK/'
       cleanDestinationFolder: false
     condition: eq(variables.buildDEPS, false)
     displayName: Extract AAX SDK
+
+  - bash: |
+      cd ./Dependencies/IPlug/
+      ls -la
+      cd ./Dependencies/IPlug/AAX_SDK/
+      ls -la
 
   - task: VSBuild@1
     inputs:
