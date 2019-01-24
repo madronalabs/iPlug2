@@ -206,22 +206,16 @@ jobs:
       secureFile: "AAX_SDK.zip"
     displayName: Download AAX SDK
   
-  - bash: |
-      mkdir -p ./Dependencies/IPlug/AAX_SDK/
-
   - task: ExtractFiles@1
     inputs:
-      archiveFilePatterns: '$(Agent.TempDirectory)/AAX_SDK.zip'
-      destinationFolder: 'Dependencies/IPlug/AAX_SDK/'
+      archiveFilePatterns: '$(Agent.TempDirectory)/*.zip'
+      destinationFolder: '$(Agent.TempDirectory)'
       cleanDestinationFolder: false
     condition: eq(variables.buildDEPS, false)
-    displayName: Extract AAX SDK
 
   - bash: |
-      cd ./Dependencies/IPlug/
-      ls -la
-      cd ./Dependencies/IPlug/AAX_SDK/
-      ls -la
+      mkdir -p ./Dependencies/IPlug/AAX_SDK
+      mv $AGENT_TEMPDIRECTORY/AAX_SDK/* ./Dependencies/IPlug/AAX_SDK
 
   - task: VSBuild@1
     inputs:
