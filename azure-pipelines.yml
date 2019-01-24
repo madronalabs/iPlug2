@@ -200,14 +200,24 @@ jobs:
 
   steps:
   - checkout: none
-  - bash: |
-      mkdir -p ./Dependencies/IPlug/
-    displayName: Make Folder Structure
 
   - task: DownloadSecureFile@1
     inputs:
       secureFile: "AAX_SDK.zip"
     displayName: Download AAX SDK
+
+  - task: ExtractFiles@1
+    inputs:
+      archiveFilePatterns: '$(Agent.TempDirectory)/*.zip'
+      destinationFolder: '$(Agent.TempDirectory)'
+      cleanDestinationFolder: false
+    condition: eq(variables.buildDEPS, false)
+    displayName: Extract AAX SDK
+
+  - bash: |
+      mkdir -p ./Dependencies/IPlug/AAX_SDK
+      mv $AGENT_TEMPDIRECTORY/AAX_SDK/* ./Dependencies/IPlug/AAX_SDK
+    displayName: Move Files
 
   - task: VSBuild@1
     inputs:
