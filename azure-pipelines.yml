@@ -3,7 +3,7 @@ variables:
   downloadDEPS: true
   buildWeb: false
   buildMac: false
-  buildWin: false
+  buildWin: true
   # buildInstallers: false #if true, the mac/win projects will build installers, rather than packaging individual binaries
   configuration: 'Release'
   target: 'All'
@@ -194,7 +194,7 @@ jobs:
     displayName: Publish Windows Dependencies Artifacts
 
 - job: BUILD_WIN_AAX_LIBS
-  # condition: and(eq(variables.buildDEPS, false), eq(variables.buildWin, true))
+  condition: and(eq(variables.buildDEPS, false), eq(variables.buildWin, true))
   pool:
     vmImage: 'vs2017-win2016'
 
