@@ -215,7 +215,8 @@ jobs:
   - bash: |
       mkdir -p ./Dependencies/IPlug/AAX_SDK
       mv AAX_SDK/* ./Dependencies/IPlug/AAX_SDK
-
+      ls -la ./Dependencies/IPlug/AAX_SDK
+      
   - task: VSBuild@1
     inputs:
       solution: 'Dependencies/IPlug/AAX_SDK/Libs/AAXLibrary/WinBuild/vs2017/AAXLibrary.sln'
