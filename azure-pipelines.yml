@@ -209,7 +209,7 @@ jobs:
   - task: ExtractFiles@1
     inputs:
       archiveFilePatterns: '$(Agent.TempDirectory)/*.zip'
-      destinationFolder: '$(Agent.TempDirectory)'
+      destinationFolder: 'AAX_SDK'
       cleanDestinationFolder: false
 
   - bash: |
