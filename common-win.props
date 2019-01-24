@@ -54,7 +54,6 @@
     <VST3_INC_PATHS>$(IPLUG_PATH)\VST3;$(VST3_SDK)</VST3_INC_PATHS>
     <AAX_INC_PATHS>$(IPLUG_PATH)\AAX;$(AAX_SDK)\Interfaces;$(AAX_SDK)\Interfaces\ACF;</AAX_INC_PATHS>
     <AAX_DEFS>AAX_API;IPLUG_EDITOR=1;IPLUG_DSP=1;_WINDOWS;WIN32;_WIN32;WINDOWS_VERSION;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE</AAX_DEFS>
-    <PNG_DEFS />
     <ALL_DEFS>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;NOMINMAX;$(PNG_DEFS)</ALL_DEFS>
     <AAX_LIBS>wininet.lib;odbc32.lib;odbccp32.lib;psapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comctl32.lib;</AAX_LIBS>
     <APP_LIBS>dsound.lib;winmm.lib;</APP_LIBS>
@@ -64,6 +63,8 @@
     <VST3_32_COMMAND_ARGS />
     <COPY_VST2>1</COPY_VST2>
     <REAPER_SDK>$(IPLUG_DEPS_PATH)/Reaper</REAPER_SDK>
+    <AAX_ICON>$(AAX_SDK)\Utilities\PlugIn.ico</AAX_ICON>
+    <VST_ICON>$(VST3_SDK)\doc\artwork\VST_Logo_Steinberg.ico</VST_ICON>
   </PropertyGroup>
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
@@ -78,6 +79,7 @@
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(STATIC_LIBS_PATH);$(AAX_SDK)\Libs\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <Lib>
       <AdditionalDependencies />
@@ -240,9 +242,6 @@
     <BuildMacro Include="AAX_DEFS">
       <Value>$(AAX_DEFS)</Value>
     </BuildMacro>
-    <BuildMacro Include="PNG_DEFS">
-      <Value>$(PNG_DEFS)</Value>
-    </BuildMacro>
     <BuildMacro Include="ALL_DEFS">
       <Value>$(ALL_DEFS)</Value>
     </BuildMacro>
@@ -269,6 +268,12 @@
     </BuildMacro>
     <BuildMacro Include="REAPER_SDK">
       <Value>$(REAPER_SDK)</Value>
+    </BuildMacro>
+    <BuildMacro Include="AAX_ICON">
+      <Value>$(AAX_ICON)</Value>
+    </BuildMacro>
+    <BuildMacro Include="VST_ICON">
+      <Value>$(VST_ICON)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>
