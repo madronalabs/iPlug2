@@ -12,7 +12,7 @@ steps:
       graphics: ${{parameters.graphics}}
       target: ${{parameters.target}}
       artifactName: MyTestProject
-      repo: https://olilarkin:$(Private.GITHUB_PAT)@github.com/iPlug2/MyTestProject.git
+      repo: https://olilarkin:{{$(Private.GITHUB_PAT)}}@github.com/iPlug2/MyTestProject.git
 
   # IPlugEffect
   # - template: ${{parameters.platform}}
