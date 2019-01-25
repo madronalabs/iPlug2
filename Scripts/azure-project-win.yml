@@ -4,11 +4,12 @@ parameters:
   graphics: 'NANOVG'
   target: 'All'
   artifactName: ''
-  repo: ''
+  repo: 'none'
 
 steps:
   - bash: |
-      if [ -z ${{ parameters.repo }} ]
+      echo repo parameter = ${{ parameters.repo }}
+      if [ ${{ parameters.repo }} = none ]
       then
         if [ ! -d ./${{ parameters.path }} ]
         then
