@@ -333,17 +333,17 @@ jobs:
         graphics: 'NANOVG'
         condition: eq(variables.buildNANOVG, true)
 
-      CAIRO:
-        graphics: 'CAIRO'
-        condition: eq(variables.buildCAIRO, true)
+      # CAIRO:
+      #   graphics: 'CAIRO'
+      #   condition: eq(variables.buildCAIRO, true)
       
-      LICE:
-        graphics: 'LICE'
-        condition: eq(variables.buildLICE, true)
+      # LICE:
+      #   graphics: 'LICE'
+      #   condition: eq(variables.buildLICE, true)
 
-      AGG:
-        graphics: 'AGG'
-        condition: eq(variables.buildAGG, true)
+      # AGG:
+      #   graphics: 'AGG'
+      #   condition: eq(variables.buildAGG, true)
 
   pool:
     vmImage: 'vs2017-win2016'

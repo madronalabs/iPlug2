@@ -4,14 +4,24 @@ parameters:
   target: 'All'
 
 steps:
-  # IPlugEffect
+  # Your Project
   - template: ${{parameters.platform}}
     parameters:
-      name: IPlugEffect
-      path: 'Examples'
+      name: MyTestProject
+      path: 'Projects'
       graphics: ${{parameters.graphics}}
       target: ${{parameters.target}}
-      artifactName: IPlugEffect_${{parameters.graphics}}
+      artifactName: MyTestProject
+      repo: https://github.com/iPlug2/MyTestProject.git
+
+  # IPlugEffect
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IPlugEffect
+  #     path: 'Examples'
+  #     graphics: ${{parameters.graphics}}
+  #     target: ${{parameters.target}}
+  #     artifactName: IPlugEffect_${{parameters.graphics}}
 
   # IPlugInstrument
   # - template: ${{parameters.platform}}

@@ -4,8 +4,18 @@ parameters:
   graphics: 'NANOVG'
   target: 'All'
   artifactName: ''
+  repo: ''
 
 steps:
+  - bash: |
+      if [ ! -d ./${{ parameters.path }} ]
+      then
+        mkdir -p ./${{ parameters.path }}
+      fi
+      cd ./${{ parameters.path }} 
+      git clone --recursive ./${{ parameters.repo }} ${{ parameters.name }}
+    displayName: Clone ${{ parameters.name }} repository
+
   - bash: |
       graphics=${{ parameters.graphics }}
       if [ $graphics = "LICE" ]
@@ -21,7 +31,7 @@ steps:
         cd ./${{ parameters.path }}/${{ parameters.name }}/config
         sed -i.bu 's/IGRAPHICS_NANOVG;IGRAPHICS_GL2/IGRAPHICS_AGG/' ${{ parameters.name }}-win.props
       fi
-    displayName: Set graphics string
+    displayName: Set graphics string to ${{ parameters.graphics }}
 
   - task: VSBuild@1
     inputs:
