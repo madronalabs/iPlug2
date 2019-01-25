@@ -1,8 +1,8 @@
 variables:
   buildDEPS: false
   downloadDEPS: true
-  buildWeb: true
-  buildMac: true
+  buildWeb: false
+  buildMac: false
   buildWin: true
   buildNANOVG: true;
   buildLICE: false;
@@ -296,17 +296,17 @@ jobs:
         graphics: 'NANOVG'
         condition: eq(variables.buildNANOVG, true)
 
-      CAIRO:
-        graphics: 'CAIRO'
-        condition: eq(variables.buildCAIRO, true)
+      # CAIRO:
+      #   graphics: 'CAIRO'
+      #   condition: eq(variables.buildCAIRO, true)
       
-      LICE:
-        graphics: 'LICE'
-        condition: eq(variables.buildLICE, true)
+      # LICE:
+      #   graphics: 'LICE'
+      #   condition: eq(variables.buildLICE, true)
 
-      AGG:
-        graphics: 'AGG'
-        condition: eq(variables.buildAGG, true)
+      # AGG:
+      #   graphics: 'AGG'
+      #   condition: eq(variables.buildAGG, true)
 
   pool:
     vmImage: 'macos-10.13'
@@ -373,9 +373,9 @@ jobs:
         graphics: 'NANOVG'
         condition: eq(variables.buildNANOVG, true)
 
-      CANVAS:
-        graphics: 'CANVAS'
-        condition: eq(variables.buildCANVAS, true)
+      # CANVAS:
+      #   graphics: 'CANVAS'
+      #   condition: eq(variables.buildCANVAS, true)
 
   pool:
     vmImage: 'ubuntu-16.04'

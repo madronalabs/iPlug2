@@ -4,46 +4,52 @@ parameters:
   target: 'All'
 
 steps:
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IPlugEffect
-      path: 'Examples'
-      graphics: ${{parameters.graphics}}
-      target: ${{parameters.target}}
-      artifactName: IPlugEffect_${{parameters.graphics}}
+  # IPlugEffect
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IPlugEffect
+  #     path: 'Examples'
+  #     graphics: ${{parameters.graphics}}
+  #     target: ${{parameters.target}}
+  #     artifactName: IPlugEffect_${{parameters.graphics}}
 
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IPlugInstrument
-      path: 'Examples'
-      graphics: ${{parameters.graphics}}       
-      target: ${{parameters.target}}
-      artifactName: IPlugInstrument_${{parameters.graphics}}
+  # IPlugInstrument
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IPlugInstrument
+  #     path: 'Examples'
+  #     graphics: ${{parameters.graphics}}       
+  #     target: ${{parameters.target}}
+  #     artifactName: IPlugInstrument_${{parameters.graphics}}
 
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IPlugControls
-      path: 'Examples'
-      graphics: ${{parameters.graphics}}
-      target: ${{parameters.target}}
-      artifactName: IPlugControls_${{parameters.graphics}}
+  # IPlugControls
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IPlugControls
+  #     path: 'Examples'
+  #     graphics: ${{parameters.graphics}}
+  #     target: ${{parameters.target}}
+  #     artifactName: IPlugControls_${{parameters.graphics}}
 
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IPlugFaustDSP
-      path: 'Examples'
-      graphics: ${{parameters.graphics}}
-      target: ${{parameters.target}}
-      artifactName: IPlugFaustDSP_${{parameters.graphics}}
+  # IPlugFaustDSP
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IPlugFaustDSP
+  #     path: 'Examples'
+  #     graphics: ${{parameters.graphics}}
+  #     target: ${{parameters.target}}
+  #     artifactName: IPlugFaustDSP_${{parameters.graphics}}
 
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IGraphicsStressTest
-      path: 'Tests'
-      graphics: ${{parameters.graphics}}
-      target: ${{parameters.target}}
-      artifactName: IGraphicsStressTest_${{parameters.graphics}}
+  # IGraphicsStressTest
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IGraphicsStressTest
+  #     path: 'Tests'
+  #     graphics: ${{parameters.graphics}}
+  #     target: ${{parameters.target}}
+  #     artifactName: IGraphicsStressTest_${{parameters.graphics}}
 
+  # IGraphicsTest
   - template: ${{parameters.platform}}
     parameters:
       name: IGraphicsTest
