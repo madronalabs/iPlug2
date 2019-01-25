@@ -42,9 +42,12 @@ steps:
   - bash: |
       rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*/bin/x64
       rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*/x64
-      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*/x64/bin/*.iobj
-      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*/x64/bin/*.ipdb
-      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*/x64/Release
+      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/aax/x64/bin/${{ parameters.name }.iobj
+      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/aax/x64/bin/${{ parameters.name }.ipdb
+      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/aax/x64/Release
+      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/vst3/x64/bin/${{ parameters.name }.iobj
+      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/vst3/x64/bin/${{ parameters.name }.ipdb
+      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/vst3/x64/Release
     displayName: Delete unwanted files
 
   # - bash: |
