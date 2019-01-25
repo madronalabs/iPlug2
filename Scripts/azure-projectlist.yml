@@ -4,18 +4,15 @@ parameters:
   target: 'All'
 
 steps:
-  - bash: |
-      echo variable $(Private.TEST)
-
-  # Your Project
-  # - template: ${{parameters.platform}}
-  #   parameters:
-  #     name: MyTestProject
-  #     path: 'Projects'
-  #     graphics: ${{parameters.graphics}}
-  #     target: ${{parameters.target}}
-  #     artifactName: MyTestProject
-  #     repo: https://github.com/iPlug2/MyTestProject.git
+  Your Project
+  - template: ${{parameters.platform}}
+    parameters:
+      name: MyTestProject
+      path: 'Projects'
+      graphics: ${{parameters.graphics}}
+      target: ${{parameters.target}}
+      artifactName: MyTestProject
+      repo: https://olilarkin:$(Private.GITHUB_PAT)@github.com/iPlug2/MyTestProject.git
 
   # IPlugEffect
   # - template: ${{parameters.platform}}
