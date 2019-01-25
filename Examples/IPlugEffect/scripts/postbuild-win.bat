@@ -61,19 +61,19 @@ if %PLATFORM% == "Win32" (
   
   if %FORMAT% == ".vst3" (
     echo copying 32bit binary to VST3 BUNDLE ..
-    call ..\..\..\Scripts\create_bundle.bat %BUILD_DIR%\%NAME%.vst3 %VST_ICON% %FORMAT%
+    call %CREATE_BUNDLE_SCRIPT% %BUILD_DIR%\%NAME%.vst3 %VST_ICON% %FORMAT%
     copy /y %BUILT_BINARY% %BUILD_DIR%\%NAME%.vst3\Contents\x86-win
     echo copying VST3 bundle to 32bit VST3 Plugins folder ...
-    call ..\..\..\Scripts\create_bundle.bat %VST3_32_PATH%\%NAME%.vst3 %VST_ICON% %FORMAT%
+    call %CREATE_BUNDLE_SCRIPT% %VST3_32_PATH%\%NAME%.vst3 %VST_ICON% %FORMAT%
     xcopy /E /H /Y %BUILD_DIR%\%NAME%.vst3\Contents\*  %VST3_32_PATH%\%NAME%.vst3\Contents\
   )
   
   if %FORMAT% == ".aaxplugin" (
     echo copying 32bit binary to AAX BUNDLE ..
-    call ..\..\..\Scripts\create_bundle.bat %BUILD_DIR%\%NAME%.aaxplugin %AAX_ICON% %FORMAT%
+    call %CREATE_BUNDLE_SCRIPT% %BUILD_DIR%\%NAME%.aaxplugin %AAX_ICON% %FORMAT%
     copy /y %BUILT_BINARY% %BUILD_DIR%\%NAME%.aaxplugin\Contents\Win32
-    echo copying 32bit binary to 32bit AAX Plugins folder ... 
-    call ..\..\..\Scripts\create_bundle.bat %BUILD_DIR%\%NAME%.aaxplugin %AAX_ICON% %FORMAT%
+    echo copying 32bit bundle to 32bit AAX Plugins folder ... 
+    call %CREATE_BUNDLE_SCRIPT% %BUILD_DIR%\%NAME%.aaxplugin %AAX_ICON% %FORMAT%
     xcopy /E /H /Y %BUILD_DIR%\%NAME%.aaxplugin\Contents\* %AAX_32_PATH%\%NAME%.aaxplugin\Contents\
   )
 )
@@ -102,19 +102,19 @@ if %PLATFORM% == "x64" (
   
   if %FORMAT% == ".vst3" (
     echo copying 64bit binary to VST3 BUNDLE ...
-    call ..\..\..\Scripts\create_bundle.bat %BUILD_DIR%\%NAME%.vst3 %VST_ICON% %FORMAT%
+    call %CREATE_BUNDLE_SCRIPT% %BUILD_DIR%\%NAME%.vst3 %VST_ICON% %FORMAT%
     copy /y %BUILT_BINARY% %BUILD_DIR%\%NAME%.vst3\Contents\x86_64-win
     echo copying VST3 bundle to 64bit VST3 Plugins folder ...
-    call ..\..\..\Scripts\create_bundle.bat %VST3_64_PATH%\%NAME%.vst3 %VST_ICON% %FORMAT%
+    call %CREATE_BUNDLE_SCRIPT% %VST3_64_PATH%\%NAME%.vst3 %VST_ICON% %FORMAT%
     xcopy /E /H /Y %BUILD_DIR%\%NAME%.vst3\Contents\*  %VST3_64_PATH%\%NAME%.vst3\Contents\
   )
   
   if %FORMAT% == ".aaxplugin" (
     echo copying 64bit binary to AAX BUNDLE ...
-    call ..\..\..\Scripts\create_bundle.bat %BUILD_DIR%\%NAME%.aaxplugin %AAX_ICON% %FORMAT%
+    call %CREATE_BUNDLE_SCRIPT% %BUILD_DIR%\%NAME%.aaxplugin %AAX_ICON% %FORMAT%
     copy /y %BUILT_BINARY% %BUILD_DIR%\%NAME%.aaxplugin\Contents\x64
-    echo copying 64bit binary to 64bit AAX Plugins folder ... 
-    call ..\..\..\Scripts\create_bundle.bat %BUILD_DIR%\%NAME%.aaxplugin %AAX_ICON% %FORMAT%
+    echo copying 64bit bundle to 64bit AAX Plugins folder ... 
+    call %CREATE_BUNDLE_SCRIPT% %BUILD_DIR%\%NAME%.aaxplugin %AAX_ICON% %FORMAT%
     xcopy /E /H /Y %BUILD_DIR%\%NAME%.aaxplugin\Contents\* %AAX_64_PATH%\%NAME%.aaxplugin\Contents\
   )
 )

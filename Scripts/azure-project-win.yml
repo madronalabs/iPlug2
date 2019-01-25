@@ -29,7 +29,7 @@ steps:
       vsVersion: '15.0'
       platform: x64
       configuration: '${{ parameters.configuration }}'
-    displayName: Compile Visual Studio Solution x64
+    displayName: Compile ${{ parameters.name }} Visual Studio Solution x64
 
   # - task: VSBuild@1
   #   inputs:
@@ -37,7 +37,7 @@ steps:
   #     vsVersion: '15.0'
   #     platform: Win32
   #     configuration: '${{ parameters.configuration }}'
-  #   displayName: Compile Visual Studio Solution Win32
+  #   displayName: Compile ${{ parameters.name }} Visual Studio Solution Win32
 
   - bash: |
       if [ -d ./${{ parameters.path }}/${{ parameters.name }}/build-win/vst2 ]
