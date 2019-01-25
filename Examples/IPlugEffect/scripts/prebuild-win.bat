@@ -24,10 +24,10 @@ echo END PREBUILD SCRIPT VARIABLES ---------------------------------------------
 
 if %FORMAT% == ".vst3" (
  REM DEL /Q /F /S %VST_BUNDLE%
-  CALL ..\..\..\Scripts\CreateBundle.bat %VST_BUNDLE% %VST_ICON% %FORMAT%
+  CALL ..\..\..\Scripts\create_bundle.bat %VST_BUNDLE% %VST_ICON% %FORMAT%
 )
 
 if %FORMAT% == ".aaxplugin" (
  REM DEL /Q /F /S %AAX_BUNDLE%
-  CALL ..\..\..\Scripts\CreateBundle.bat %AAX_BUNDLE% %AAX_ICON% %FORMAT%
+  CALL ..\..\..\Scripts\create_bundle.bat %AAX_BUNDLE% %AAX_ICON% %FORMAT%
 )
