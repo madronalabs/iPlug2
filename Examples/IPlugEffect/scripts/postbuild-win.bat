@@ -105,7 +105,7 @@ if %PLATFORM% == "x64" (
   if %FORMAT% == ".vst3" (
     echo copying 64bit binary to VST3 BUNDLE ...
     call %CREATE_BUNDLE_SCRIPT% %BUILD_DIR%\%NAME%.vst3 %VST_ICON% %FORMAT%
-    copy /y %BUILT_BINARY% %BUILD_DIR%\%NAME%.vst3\Contents\x86_64-
+    copy /y %BUILT_BINARY% %BUILD_DIR%\%NAME%.vst3\Contents\x86_64-win
     if exist %VST3_64_PATH% (
       echo copying VST3 bundle to 64bit VST3 Plugins folder ...
       call %CREATE_BUNDLE_SCRIPT% %VST3_64_PATH%\%NAME%.vst3 %VST_ICON% %FORMAT%

@@ -17,6 +17,8 @@ steps:
         fi
         cd ./${{ parameters.path }} 
         git clone --recursive ${{ parameters.repo }} ${{ parameters.name }}
+      else
+        echo no remote repository argument supplied, building local project ${{ parameters.path }}/${{ parameters.name }} ... 
       fi
     displayName: (Optionally) clone ${{ parameters.name }} repository
 
