@@ -4,7 +4,7 @@ parameters:
   target: 'All'
 
 steps:
-  Your Project
+#  Your Project
   - template: ${{parameters.platform}}
     parameters:
       name: MyTestProject
@@ -12,7 +12,7 @@ steps:
       graphics: ${{parameters.graphics}}
       target: ${{parameters.target}}
       artifactName: MyTestProject
-      repo: iPlug2/MyTestProject.git
+      repo: https://olilarkin:${Private.GITHUB_PAT}@github.com/iPlug2/MyTestProject.git
 
   # IPlugEffect
   # - template: ${{parameters.platform}}
