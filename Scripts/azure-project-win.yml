@@ -8,15 +8,16 @@ parameters:
 
 steps:
   - bash: |
-      echo ${{ parameters.repo }}
-      
-      if [ ! -d ./${{ parameters.path }} ]
+      if [ -z ${{ parameters.repo }} ]
       then
-        mkdir -p ./${{ parameters.path }}
+        if [ ! -d ./${{ parameters.path }} ]
+        then
+          mkdir -p ./${{ parameters.path }}
+        fi
+        cd ./${{ parameters.path }} 
+        git clone --recursive ${{ parameters.repo }} ${{ parameters.name }}
       fi
-      cd ./${{ parameters.path }} 
-      git clone --recursive ${{ parameters.repo }} ${{ parameters.name }}
-    displayName: Clone ${{ parameters.name }} repository
+    displayName: (Optionally) clone ${{ parameters.name }} repository
 
   - bash: |
       graphics=${{ parameters.graphics }}

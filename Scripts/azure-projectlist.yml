@@ -5,14 +5,14 @@ parameters:
 
 steps:
   # Your Project
-  # - template: ${{parameters.platform}}
-  #   parameters:
-  #     name: MyTestProject
-  #     path: 'Projects'
-  #     graphics: ${{parameters.graphics}}
-  #     target: ${{parameters.target}}
-  #     artifactName: MyTestProject
-  #     repo: https://github.com/iPlug2/MyTestProject.git
+  - template: ${{parameters.platform}}
+    parameters:
+      name: MyTestProject
+      path: 'Projects'
+      graphics: ${{parameters.graphics}}
+      target: ${{parameters.target}}
+      artifactName: MyTestProject
+      repo: https://github.com/iPlug2/MyTestProject.git
 
   # IPlugEffect
   - template: ${{parameters.platform}}
