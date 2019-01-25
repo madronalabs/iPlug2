@@ -1,8 +1,8 @@
 variables:
   buildDEPS: false
   downloadDEPS: true
-  buildWeb: false
-  buildMac: false
+  buildWeb: true
+  buildMac: true
   buildWin: true
   # buildInstallers: false #if true, the mac/win projects will build installers, rather than packaging individual binaries
   configuration: 'Release'
