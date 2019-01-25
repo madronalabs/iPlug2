@@ -9,7 +9,7 @@ parameters:
 steps:
   - bash: |
       echo repo parameter = ${{ parameters.repo }}
-      if [ ${{ parameters.repo }} = none ]
+      if [ ${{ parameters.repo }} != none ]
       then
         if [ ! -d ./${{ parameters.path }} ]
         then
@@ -42,6 +42,7 @@ steps:
       solution: '${{ parameters.path }}/${{ parameters.name }}/${{ parameters.name }}.sln'
       vsVersion: '15.0'
       platform: x64
+      msbuildArgs: /m
       configuration: '${{ parameters.configuration }}'
     displayName: Compile ${{ parameters.name }} Visual Studio Solution x64
 
