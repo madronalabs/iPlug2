@@ -15,8 +15,9 @@ steps:
         then
           mkdir -p ./${{ parameters.path }}
         fi
-        cd ./${{ parameters.path }} 
-        git clone --recursive ${{ parameters.repo }} ${{ parameters.name }}
+        cd ./${{ parameters.path }}
+        git clone --recursive https://olilarkin:${Private.GITHUB_PAT}@github.com/${{ parameters.repo }} ${{ parameters.name }}
+        # git clone --recursive ${{ parameters.repo }} ${{ parameters.name }}
       else
         echo no remote repository argument supplied, building local project ${{ parameters.path }}/${{ parameters.name }} ... 
       fi
