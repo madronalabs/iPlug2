@@ -5,13 +5,13 @@ parameters:
 
 steps:
   # IPlugEffect
-  # - template: ${{parameters.platform}}
-  #   parameters:
-  #     name: IPlugEffect
-  #     path: 'Examples'
-  #     graphics: ${{parameters.graphics}}
-  #     target: ${{parameters.target}}
-  #     artifactName: IPlugEffect_${{parameters.graphics}}
+  - template: ${{parameters.platform}}
+    parameters:
+      name: IPlugEffect
+      path: 'Examples'
+      graphics: ${{parameters.graphics}}
+      target: ${{parameters.target}}
+      artifactName: IPlugEffect_${{parameters.graphics}}
 
   # IPlugInstrument
   # - template: ${{parameters.platform}}
@@ -50,10 +50,10 @@ steps:
   #     artifactName: IGraphicsStressTest_${{parameters.graphics}}
 
   # IGraphicsTest
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IGraphicsTest
-      path: 'Tests'
-      graphics: ${{parameters.graphics}}
-      target: ${{parameters.target}}
-      artifactName: IGraphicsTest_${{parameters.graphics}}
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IGraphicsTest
+  #     path: 'Tests'
+  #     graphics: ${{parameters.graphics}}
+  #     target: ${{parameters.target}}
+  #     artifactName: IGraphicsTest_${{parameters.graphics}}
