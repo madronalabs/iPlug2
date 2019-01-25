@@ -57,7 +57,7 @@ steps:
 
       if [ -d ./${{ parameters.path }}/${{ parameters.name }}/build-win/app ]
       then
-        rm -r ./${{ parameters.path }}/${{ parameters.name }}/build-win/app ]
+        rm -r ./${{ parameters.path }}/${{ parameters.name }}/build-win/app
       fi
     displayName: Delete unwanted files
 
