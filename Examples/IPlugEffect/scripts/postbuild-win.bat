@@ -63,9 +63,11 @@ if %PLATFORM% == "Win32" (
     echo copying 32bit binary to VST3 BUNDLE ..
     call %CREATE_BUNDLE_SCRIPT% %BUILD_DIR%\%NAME%.vst3 %VST_ICON% %FORMAT%
     copy /y %BUILT_BINARY% %BUILD_DIR%\%NAME%.vst3\Contents\x86-win
-    echo copying VST3 bundle to 32bit VST3 Plugins folder ...
-    call %CREATE_BUNDLE_SCRIPT% %VST3_32_PATH%\%NAME%.vst3 %VST_ICON% %FORMAT%
-    xcopy /E /H /Y %BUILD_DIR%\%NAME%.vst3\Contents\*  %VST3_32_PATH%\%NAME%.vst3\Contents\
+    if exist %VST3_32_PATH% ( 
+      echo copying VST3 bundle to 32bit VST3 Plugins folder ...
+      call %CREATE_BUNDLE_SCRIPT% %VST3_32_PATH%\%NAME%.vst3 %VST_ICON% %FORMAT%
+      xcopy /E /H /Y %BUILD_DIR%\%NAME%.vst3\Contents\*  %VST3_32_PATH%\%NAME%.vst3\Contents\
+    )
   )
   
   if %FORMAT% == ".aaxplugin" (
@@ -103,10 +105,12 @@ if %PLATFORM% == "x64" (
   if %FORMAT% == ".vst3" (
     echo copying 64bit binary to VST3 BUNDLE ...
     call %CREATE_BUNDLE_SCRIPT% %BUILD_DIR%\%NAME%.vst3 %VST_ICON% %FORMAT%
-    copy /y %BUILT_BINARY% %BUILD_DIR%\%NAME%.vst3\Contents\x86_64-win
-    echo copying VST3 bundle to 64bit VST3 Plugins folder ...
-    call %CREATE_BUNDLE_SCRIPT% %VST3_64_PATH%\%NAME%.vst3 %VST_ICON% %FORMAT%
-    xcopy /E /H /Y %BUILD_DIR%\%NAME%.vst3\Contents\*  %VST3_64_PATH%\%NAME%.vst3\Contents\
+    copy /y %BUILT_BINARY% %BUILD_DIR%\%NAME%.vst3\Contents\x86_64-
+    if exist %VST3_64_PATH% (
+      echo copying VST3 bundle to 64bit VST3 Plugins folder ...
+      call %CREATE_BUNDLE_SCRIPT% %VST3_64_PATH%\%NAME%.vst3 %VST_ICON% %FORMAT%
+      xcopy /E /H /Y %BUILD_DIR%\%NAME%.vst3\Contents\*  %VST3_64_PATH%\%NAME%.vst3\Contents\
+    )
   )
   
   if %FORMAT% == ".aaxplugin" (
