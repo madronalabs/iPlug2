@@ -15,6 +15,7 @@ steps:
       cd ./${{ parameters.path }} 
       git clone --recursive ${{ parameters.repo }} ${{ parameters.name }}
     displayName: Clone ${{ parameters.name }} repository
+    condition: ne(${{ parameters.repo }}, null)
 
   - bash: |
       graphics=${{ parameters.graphics }}
