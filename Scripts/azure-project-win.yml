@@ -39,9 +39,13 @@ steps:
   #     configuration: '${{ parameters.configuration }}'
   #   displayName: Compile Visual Studio Solution Win32
 
-#  - bash: |
-#      cp ${{ parameters.path }}/${{ parameters.name }}/build-win/*/*/bin
-#    displayName: Delete unwanted files
+ - bash: |
+     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*/bin/x64
+     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*/x64
+     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*/x64/bin/*.iobj
+     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*/x64/bin/*.ipdb
+     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-win/*/x64/Release
+   displayName: Delete unwanted files
 
   # - bash: |
   #     mkdir -p ${{ parameters.path }}/${{ parameters.name }}/build-win/
