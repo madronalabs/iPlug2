@@ -26,7 +26,7 @@
     <PNG_PATH>$(WDL_PATH)\libpng</PNG_PATH>
     <ZLIB_PATH>$(WDL_PATH)\zlib</ZLIB_PATH>
     <STB_PATH>$(IGRAPHICS_DEPS_PATH)\STB</STB_PATH>
-    <FAUST_PATH>$(DEPS_PATH)\Build\mac\include</FAUST_PATH>
+    <FAUST_INC_PATHS>$(DEPS_PATH)\Build\mac\include;$(WDL_PATH)\win32_curses</FAUST_INC_PATHS>
     <STATIC_LIBS_PATH>$(DEPS_PATH)\Build\win\$(Platform)\$(Configuration)</STATIC_LIBS_PATH>
     <IGRAPHICS_INC_PATHS>$(IGRAPHICS_PATH);$(LICE_PATH);$(NANOSVG_PATH);$(NANOVG_PATH);$(AGG_PATH);$(CAIRO_PATH);$(CONTROLS_PATH);$(PLATFORMS_PATH);$(DRAWING_PATH);$(GLEW_PATH);$(GLAD_PATH)\include; $(GLAD_PATH)\src\;$(PNG_PATH);$(ZLIB_PATH);$(FREETYPE_PATH);$(STB_PATH)</IGRAPHICS_INC_PATHS>
     <VST2_SDK>$(IPLUG_DEPS_PATH)\VST2_SDK</VST2_SDK>
@@ -159,8 +159,8 @@
     <BuildMacro Include="STB_PATH">
       <Value>$(STB_PATH)</Value>
     </BuildMacro>
-    <BuildMacro Include="FAUST_PATH">
-      <Value>$(FAUST_PATH)</Value>
+    <BuildMacro Include="FAUST_INC_PATHS">
+      <Value>$(FAUST_INC_PATHS)</Value>
     </BuildMacro>
     <BuildMacro Include="STATIC_LIBS_PATH">
       <Value>$(STATIC_LIBS_PATH)</Value>

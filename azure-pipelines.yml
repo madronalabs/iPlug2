@@ -4,6 +4,12 @@ variables:
   buildWeb: true
   buildMac: true
   buildWin: true
+  buildNANOVG: true;
+  buildLICE: false;
+  buildCAIRO: false;
+  buildAGG: false;
+  buildCANVAS: false;
+
   # buildInstallers: false #if true, the mac/win projects will build installers, rather than packaging individual binaries
   configuration: 'Release'
   target: 'All'
@@ -288,12 +294,19 @@ jobs:
     matrix:
       NANOVG:
         graphics: 'NANOVG'
+        condition: eq(variables.buildNANOVG, true)
+
       CAIRO:
         graphics: 'CAIRO'
+        condition: eq(variables.buildCAIRO, true)
+      
       LICE:
         graphics: 'LICE'
+        condition: eq(variables.buildLICE, true)
+
       AGG:
         graphics: 'AGG'
+        condition: eq(variables.buildAGG, true)
 
   pool:
     vmImage: 'macos-10.13'
@@ -318,12 +331,19 @@ jobs:
     matrix:
       NANOVG:
         graphics: 'NANOVG'
+        condition: eq(variables.buildNANOVG, true)
+
       CAIRO:
         graphics: 'CAIRO'
+        condition: eq(variables.buildCAIRO, true)
+      
       LICE:
         graphics: 'LICE'
+        condition: eq(variables.buildLICE, true)
+
       AGG:
         graphics: 'AGG'
+        condition: eq(variables.buildAGG, true)
 
   pool:
     vmImage: 'vs2017-win2016'
@@ -351,8 +371,11 @@ jobs:
     matrix:
       NANOVG:
         graphics: 'NANOVG'
+        condition: eq(variables.buildNANOVG, true)
+
       CANVAS:
         graphics: 'CANVAS'
+        condition: eq(variables.buildCANVAS, true)
 
   pool:
     vmImage: 'ubuntu-16.04'
