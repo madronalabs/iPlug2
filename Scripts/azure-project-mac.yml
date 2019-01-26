@@ -22,7 +22,14 @@ steps:
     env:
       GITHUB_PAT: $(GITHUB_PAT)
     displayName: (Optionally) clone ${{ parameters.name }} repository
-    
+
+  - bash: |
+      cd ./${{ parameters.path }}/${{ parameters.name }}/scripts
+      chmod +x *.sh # in-case executable bit was lost (e.g. project duplicated on windows)
+      chmod +x *.command
+      chmod +x *.py
+    displayName: Ensure scripts are executable
+
   - bash: |
       graphics=${{ parameters.graphics }}
       if [ $graphics = "LICE" ]

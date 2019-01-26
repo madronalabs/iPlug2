@@ -38,7 +38,7 @@ steps:
       source ./emsdk_env.sh
       cd ..
       cd ./${{ parameters.path }}/${{ parameters.name }}/scripts
-      ls -la
+      chmod +x *.sh # in-case executable bit was lost (e.g. project duplicated on windows)
       ./makedist-web.sh off
     displayName: Compile ${{ parameters.name }} WAM
 
