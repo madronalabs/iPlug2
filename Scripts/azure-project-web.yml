@@ -7,7 +7,7 @@ parameters:
   srcRepo: 'none' # the git repository to clone into path/name for building
   srcBranch: 'master' # the branch to clone for building
   #WEB AUDIO MODULE publishing via git
-  publishRepo: '' # the git repository to publish the WAM to
+  publishRepo: 'none' # the git repository to publish the WAM to
   publishBranch: gh-pages # the branch to publish the WAM to
   publishOrigin: '' # the origin URL where the WAM will be hosted. NOTE: should end with / 
   user: '' # the git username to commit with when publishing
@@ -15,7 +15,6 @@ parameters:
 
 steps:
   - bash: |
-      echo srcRepo parameter = ${{ parameters.srcRepo }}
       if [ ${{ parameters.srcRepo }} != none ]
       then
         if [ ! -d ./${{ parameters.path }} ]
@@ -62,29 +61,32 @@ steps:
     displayName: Publish ${{ parameters.name }} WAM
 
   - bash: |
-      #build again with origin - this is overkill, just to customise the origin in awn script
-      cd emsdk
-      source ./emsdk_env.sh
-      cd ..
-      cd ./${{ parameters.path }}/${{ parameters.name }}/scripts
-      ./makedist-web.sh off ${{ parameters.publishOrigin }}
-      # --
+      if [ ${{ parameters.publishRepo }} != none ]
+      then
+        #build again with origin - this is overkill, just to customise the origin in awn script
+        cd emsdk
+        source ./emsdk_env.sh
+        cd ..
+        cd ./${{ parameters.path }}/${{ parameters.name }}/scripts
+        ./makedist-web.sh off ${{ parameters.publishOrigin }}
+        # --
 
-      cd ..
-      mv ./build-web/* $BUILD_ARTIFACTSTAGINGDIRECTORY
-      cd $BUILD_SOURCESDIRECTORY
-      rm -r *
-      git clone --recursive -b ${{ parameters.publishBranch }} ${{ parameters.publishRepo }} ${{ parameters.name }}
-      cd ${{ parameters.name }}
-      rm -r scripts
-      mv $BUILD_ARTIFACTSTAGINGDIRECTORY/* .
-      git config user.email ${{ parameters.email }}
-      git config user.name ${{ parameters.user }}
-      git add *
-      git commit -m "publish ${{ parameters.name }}"
-      git push origin ${{ parameters.publishBranch }}
+        cd ..
+        mv ./build-web/* $BUILD_ARTIFACTSTAGINGDIRECTORY
+        cd $BUILD_SOURCESDIRECTORY
+        rm -r *
+        git clone --recursive -b ${{ parameters.publishBranch }} ${{ parameters.publishRepo }} ${{ parameters.name }}
+        cd ${{ parameters.name }}
+        rm -r scripts
+        mv $BUILD_ARTIFACTSTAGINGDIRECTORY/* .
+        git config user.email ${{ parameters.email }}
+        git config user.name ${{ parameters.user }}
+        git add *
+        git commit -m "publish ${{ parameters.name }}"
+        git push origin ${{ parameters.publishBranch }}
+      fi
     env:
       GITHUB_PAT: $(GITHUB_PAT)
-    displayName: Publish ${{ parameters.name }} WAM to github pages
+    displayName: (Optionally) Publish ${{ parameters.name }} WAM to github pages
 
   

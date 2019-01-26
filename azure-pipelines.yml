@@ -4,11 +4,11 @@ variables:
   buildWeb: true
   buildMac: false
   buildWin: false
-  buildNANOVG: true;
-  buildLICE: false;
-  buildCAIRO: false;
-  buildAGG: false;
-  buildCANVAS: false;
+  # buildNANOVG: true;
+  # buildLICE: false;
+  # buildCAIRO: false;
+  # buildAGG: false;
+  # buildCANVAS: false;
   # buildInstallers: false #if true, the mac/win projects will build installers, rather than packaging individual binaries
   configuration: 'Release'
   target: 'All'
@@ -382,9 +382,9 @@ jobs:
         graphics: 'NANOVG'
         condition: eq(variables.buildNANOVG, true)
 
-      # CANVAS:
-      #   graphics: 'CANVAS'
-      #   condition: eq(variables.buildCANVAS, true)
+      CANVAS:
+        graphics: 'CANVAS'
+        condition: eq(variables.buildCANVAS, true)
 
   pool:
     vmImage: 'ubuntu-16.04'
@@ -405,3 +405,56 @@ jobs:
     parameters:
       platform: azure-project-web.yml
       graphics: $(graphics)
+
+
+- job: PUBLISH_IPLUG2_WEBSITE
+  dependsOn: BUILD_WEB_PROJECTS
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - checkout: none
+
+  - bash: |
+      git clone https://github.com/iPlug2/iPlug2.github.io.git $BUILD_SOURCESDIRECTORY
+      rm -r ./canvas/*
+      rm -r ./webgl/*
+    displayName: Clone website repo
+
+  - task: DownloadPipelineArtifact@0
+    inputs:
+      artifactName: 'WEB_IPlugEffect_NANOVG'
+      targetPath: '$(Agent.TempDirectory)'
+
+  - task: DownloadPipelineArtifact@0
+    inputs:
+      artifactName: 'WEB_IPlugEffect_CANVAS'
+      targetPath: '$(Agent.TempDirectory)'
+
+  - task: ExtractFiles@1
+    inputs:
+      archiveFilePatterns: '$(Agent.TempDirectory)/*.zip'
+      destinationFolder: '$(Agent.TempDirectory)'
+      cleanDestinationFolder: false
+    condition: eq(variables.buildDEPS, false)
+
+  - bash: |
+      mkdir ./canvas/IPlugEffect
+      mkdir ./webgl/IPlugEffect
+      mv $AGENT_TEMPDIRECTORY/WEB_IPlugEffect_CANVAS/* ./canvas/IPlugEffect
+      mv $AGENT_TEMPDIRECTORY/WEB_IPlugEffect_NANOVG/* ./webgl/IPlugEffect
+      ls -la
+    displayName: Clone website repo
+
+# - job: BUILD_MAC_TOOLS
+#   condition: and(eq(variables.buildTools, false), eq(variables.buildMac, true))
+
+
+#   steps:
+#     - checkout: none
+
+#     - template: Scripts/azure-get_src.yml
+
+#     - bash: |
+#         git clone --recurse-submodules https://github.com/Tracktion/pluginval.git
+#         cd pluginval/install
+#         ./mac_build
