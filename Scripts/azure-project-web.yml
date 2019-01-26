@@ -55,6 +55,7 @@ steps:
 
   - bash: |
       cd ./${{ parameters.path }}/${{ parameters.name }}
+      ls -la
       git reset --hard HEAD
       git checkout gh-pages
       mv ./build-web/* .
