@@ -72,8 +72,10 @@ steps:
 
       cd ..
       mv ./build-web/* $BUILD_ARTIFACTSTAGINGDIRECTORY
-      rm -r *
-      git checkout ${{ parameters.publishRepo }} ${{ parameters.publishBranch }}
+      cd ./${{ parameters.path }}
+      rm -r ${{ parameters.name }}
+      git clone --recursive -b ${{ parameters.publishBranch }} ${{ parameters.publishRepo }} ${{ parameters.name }}
+      cd ${{ parameters.name }}
       mv $BUILD_ARTIFACTSTAGINGDIRECTORY/* .
       git config user.email ${{ parameters.email }}
       git config user.name ${{ parameters.user }}
