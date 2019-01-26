@@ -416,35 +416,21 @@ jobs:
 
   - bash: |
       git clone https://github.com/iPlug2/iPlug2.github.io.git $BUILD_SOURCESDIRECTORY
-      rm -r ./canvas/*
-      rm -r ./webgl/*
-      ls -la
     displayName: Clone website repo
 
   - task: DownloadPipelineArtifact@0
     inputs:
       artifactName: 'WEB_IPlugEffect_NANOVG'
-      targetPath: '$(Agent.TempDirectory)'
+      targetPath: 'webgl/IPlugEffect'
 
   - task: DownloadPipelineArtifact@0
     inputs:
       artifactName: 'WEB_IPlugEffect_CANVAS'
-      targetPath: '$(Agent.TempDirectory)'
-
-  # - task: ExtractFiles@1
-  #   inputs:
-  #     archiveFilePatterns: '$(Agent.TempDirectory)/*.zip'
-  #     destinationFolder: '$(Agent.TempDirectory)'
-  #     cleanDestinationFolder: false
+      targetPath: 'canvas/IPlugEffect'
 
   - bash: |
-      ls -la $AGENT_TEMPDIRECTORY
-      mkdir ./canvas/IPlugEffect
-      mkdir ./webgl/IPlugEffect
-      mv $AGENT_TEMPDIRECTORY/WEB_IPlugEffect_CANVAS/* ./canvas/IPlugEffect
-      mv $AGENT_TEMPDIRECTORY/WEB_IPlugEffect_NANOVG/* ./webgl/IPlugEffect
       ls -la
-    displayName: Clone website repo
+    displayName: Publish
 
 # - job: BUILD_MAC_TOOLS
 #   condition: and(eq(variables.buildTools, false), eq(variables.buildMac, true))
