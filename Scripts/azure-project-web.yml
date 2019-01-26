@@ -8,7 +8,7 @@ parameters:
   srcBranch: 'master' # the branch to clone for building
   #WEB AUDIO MODULE publishing via git
   publishRepo: '' # the git repository to publish the WAM to
-  publishBranch: gh_pages # the branch to publish the WAM to
+  publishBranch: gh-pages # the branch to publish the WAM to
   publishOrigin: '' # the origin URL where the WAM will be hosted. NOTE: should end with / 
   user: '' # the git username to commit with when publishing
   email: '' # the git email address to commit with when publishing

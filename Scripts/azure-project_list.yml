@@ -18,7 +18,7 @@ steps:
 
       #WEB AUDIO MODULE publishing via git
       publishRepo: https://olilarkin:$GITHUB_PAT@github.com/iPlug2/MyTestProject.git # the git repository to publish the WAM to
-      publishBranch: gh_pages # the branch to publish the WAM to
+      publishBranch: gh-pages # the branch to publish the WAM to
       publishOrigin: https://iplug2.github.io/MyTestProject/ # the origin URL where the WAM will be hosted. NOTE: should end with / 
       user: olilarkin # the git username to commit with when publishing
       email: olilarkin@googlemail.com # the git email address to commit with when publishing
