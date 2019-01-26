@@ -84,9 +84,10 @@ jobs:
       cd ./Dependencies/IPlug
       rm -r VST3_SDK
       git clone --recursive https://github.com/steinbergmedia/vst3sdk.git VST3_SDK
-      rm -r VST3_SDK/vstgui
+      rm -r VST3_SDK/vstgui4
       rm -r VST3_SDK/doc
       rm -r VST3_SDK/cmake
+      rm -r .git
     displayName: Download VST3 SDK
     condition: or(variables.buildMac, variables.buildWin)
 
@@ -94,6 +95,7 @@ jobs:
       cd ./Dependencies/IPlug
       rm -r WAM_SDK
       git clone https://github.com/webaudiomodules/api.git WAM_SDK
+      rm -r .git
     displayName: Download WAM SDK
     condition: eq(variables.buildWeb, true)
 
@@ -101,6 +103,7 @@ jobs:
       cd ./Dependencies/IPlug
       rm -r WAM_AWP
       git clone https://github.com/jariseon/audioworklet-polyfill WAM_AWP
+      rm -r .git
     displayName: Download WAM AWP
     condition: eq(variables.buildWeb, true)
 

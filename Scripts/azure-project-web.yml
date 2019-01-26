@@ -59,6 +59,7 @@ steps:
       git checkout gh-pages
       mv ./build-web/* .
       rm -r ./build-web
+      ls -la
       git config core.autocrlf false
       git config user.email olilarkin@googlemail.com
       git config user.name olilarkin
