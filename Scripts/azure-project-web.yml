@@ -55,8 +55,10 @@ steps:
 
   - bash: |
       cd ./${{ parameters.path }}/${{ parameters.name }}
+      git reset --hard HEAD
       git checkout gh-pages
       mv ./build-web/* .
+      rm -r ./build-web
       git config core.autocrlf false
       git config user.email olilarkin@googlemail.com
       git config user.name olilarkin
