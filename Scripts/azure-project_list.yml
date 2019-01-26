@@ -5,32 +5,35 @@ parameters:
 
 steps:
   # Your Project
-  - template: ${{parameters.platform}}
-    parameters:
-      name: MyTestProject # the name of the iPlug2 project folder ... e.g. what you specified when duplicating IPlugEffect 
-      path: Projects  # the name of the folder that contains the project, which should be at the top level of the iPlug2 setup 
-                      # e.g. Examples/Tests or Projects if you want to separate external projects
-      graphics: ${{parameters.graphics}} # here you can specify a graphics backend, either, 'NANOVG', 'CAIRO', 'AGG', 'LICE', 'CANVAS'
-      target: ${{parameters.target}} # Which target of the Xcode project to build
-      artifactName: MyTestProject # How should the built artifact be named? If building for multiple graphics backends, you can customize this, using ${{parameters.graphics}}
-      srcRepo: https://olilarkin:$GITHUB_PAT@github.com/iPlug2/MyTestProject.git # the git repository to clone into path/name for building
-      srcBranch: master # the branch to clone for building
-
-      #WEB AUDIO MODULE publishing via git
-      publishRepo: https://olilarkin:$GITHUB_PAT@github.com/iPlug2/MyTestProject.git # the git repository to publish the WAM to
-      publishBranch: gh-pages # the branch to publish the WAM to
-      publishOrigin: https://iplug2.github.io/MyTestProject/ # the origin URL where the WAM will be hosted. NOTE: should end with / 
-      user: olilarkin # the git username to commit with when publishing
-      email: olilarkin@googlemail.com # the git email address to commit with when publishing
-
-  # IPlugEffect
   # - template: ${{parameters.platform}}
   #   parameters:
-  #     name: IPlugEffect
-  #     path: 'Examples'
-  #     graphics: ${{parameters.graphics}}
-  #     target: ${{parameters.target}}
-  #     artifactName: IPlugEffect_${{parameters.graphics}}
+  #     name: MyTestProject # the name of the iPlug2 project folder ... e.g. what you specified when duplicating IPlugEffect 
+  #     path: Projects  # the name of the folder that contains the project, which should be at the top level of the iPlug2 setup 
+  #                     # e.g. Examples/Tests or Projects if you want to separate external projects
+  #     graphics: ${{parameters.graphics}} # here you can specify a graphics backend, either, 'NANOVG', 'CAIRO', 'AGG', 'LICE', 'CANVAS'
+  #     target: ${{parameters.target}} # Which target of the Xcode project to build
+  #     artifactName: MyTestProject # How should the built artifact be named? If building for multiple graphics backends, you can customize this, using ${{parameters.graphics}}
+  #     srcRepo: https://olilarkin:$GITHUB_PAT@github.com/iPlug2/MyTestProject.git # the git repository to clone into path/name for building
+  #     srcBranch: master # the branch to clone for building
+
+  #     #WEB AUDIO MODULE publishing via git
+  #     publishRepo: https://olilarkin:$GITHUB_PAT@github.com/iPlug2/MyTestProject.git # the git repository to publish the WAM to
+  #     publishBranch: gh-pages # the branch to publish the WAM to
+  #     publishOrigin: https://iplug2.github.io/MyTestProject/ # the origin URL where the WAM will be hosted. NOTE: should end with / 
+  #     user: olilarkin # the git username to commit with when publishing
+  #     email: olilarkin@googlemail.com # the git email address to commit with when publishing
+
+  IPlugEffect
+  - template: ${{parameters.platform}}
+    parameters:
+      name: IPlugEffect
+      path: 'Examples'
+      graphics: ${{parameters.graphics}}
+      target: ${{parameters.target}}
+      artifactName: IPlugEffect_${{parameters.graphics}}
+      publishRepo: https://olilarkin:$GITHUB_PAT@github.com/iPlug2/IPlugEffect_${{parameters.graphics}}.git # the git repository to publish the WAM to
+      publishBranch: master
+      publishOrigin: https://iplug2.github.io/IPlugEffect_${{parameters.graphics}}/ # the origin URL where the WAM will be hosted. NOTE: should end with / 
 
   # IPlugInstrument
   # - template: ${{parameters.platform}}
