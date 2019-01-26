@@ -61,7 +61,7 @@ steps:
       git checkout gh-pages
       rm -r *  
       mv $BUILD_ARTIFACTSTAGINGDIRECTORY/* .
-      sed -i.bu 's/origin + \"scripts/${{ parameters.origin }}/' ./scripts/*-awn.js
+      sed -i.bu 's/origin + \"scripts\/${{ parameters.origin }}/' ./scripts/*-awn.js
       rm ./scripts/*.bu
       cat ./scripts/*-awn.js
       git config user.email olilarkin@googlemail.com
