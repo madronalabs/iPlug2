@@ -51,4 +51,17 @@ steps:
     inputs:
       artifactName: 'WEB_${{ parameters.artifactName }}'
       targetPath: '${{ parameters.path }}/${{ parameters.name }}/build-web'
-    displayName: Publish ${{ parameters.name }}
+    displayName: Publish ${{ parameters.name }} WAM
+
+  - bash: |
+      cd ./${{ parameters.path }}/${{ parameters.name }}
+      git branch gh-pages
+      git mv ./build-web/* .
+      git config core.autocrlf false
+      git config user.email olilarkin@googlemail.com
+      git config user.name olilarkin
+      git add *
+      git commit -m publish ${{ parameters.name }}
+    displayName: Publish ${{ parameters.name }} WAM to github pages
+
+  

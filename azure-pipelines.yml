@@ -2,8 +2,8 @@ variables:
   buildDEPS: false
   downloadDEPS: true
   buildWeb: true
-  buildMac: true
-  buildWin: true
+  buildMac: false
+  buildWin: false
   buildNANOVG: true;
   buildLICE: false;
   buildCAIRO: false;
