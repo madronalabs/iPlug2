@@ -55,11 +55,8 @@ steps:
 
   - bash: |
       cd ./${{ parameters.path }}/${{ parameters.name }}
-      mv ./build-web/* $AGENT_TEMPDIRECTORY
       git branch gh-pages
-      git rm *
-      mv $AGENT_TEMPDIRECTORY/* .
-      ls -la
+      mv ./build-web/* .
       git config core.autocrlf false
       git config user.email olilarkin@googlemail.com
       git config user.name olilarkin
