@@ -60,6 +60,8 @@ steps:
       git checkout gh-pages
       mv ./build-web/* .
       rm -r ./build-web
+      sed -i.bu 's/origin + "scripts/${{ parameters.origin }}/' ./scripts/*-awn.js
+      cat ./scripts/*-awn.js
       git config user.email olilarkin@googlemail.com
       git config user.name olilarkin
       git add *

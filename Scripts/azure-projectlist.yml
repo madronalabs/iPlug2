@@ -13,6 +13,7 @@ steps:
       target: ${{parameters.target}}
       artifactName: MyTestProject
       repo: https://olilarkin:$GITHUB_PAT@github.com/iPlug2/MyTestProject.git
+      origin: https://iplug2.github.io/MyTestProject/
 
   # IPlugEffect
   # - template: ${{parameters.platform}}
