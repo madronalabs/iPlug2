@@ -4,6 +4,7 @@ parameters:
   graphics: 'NANOVG'
   target: 'All'
   artifactName: ''
+  repo: 'none'
 
 steps:
   - bash: |

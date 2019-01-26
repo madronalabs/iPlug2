@@ -4,6 +4,7 @@ parameters:
   graphics: 'NANOVG'
   target: ''
   artifactName: ''
+  repo: 'none'
 
 steps:
   - bash: |
@@ -63,6 +64,7 @@ steps:
       git config user.name olilarkin
       git add *
       git commit -m "publish ${{ parameters.name }}"
+      git push origin
     displayName: Publish ${{ parameters.name }} WAM to github pages
 
   
