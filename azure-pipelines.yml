@@ -415,8 +415,10 @@ jobs:
   - checkout: none
 
   - bash: |
-      git clone https://github.com/iPlug2/iPlug2.github.io.git $BUILD_SOURCESDIRECTORY
+      git clone https://olilarkin:$GITHUB_PAT@github.com/iPlug2/iPlug2.github.io.git $BUILD_SOURCESDIRECTORY
     displayName: Clone website repo
+    env:
+      GITHUB_PAT: $(GITHUB_PAT)
 
   - task: DownloadPipelineArtifact@0
     inputs:
@@ -429,8 +431,12 @@ jobs:
       targetPath: 'canvas/IPlugEffect'
 
   - bash: |
-      ls -la
-    displayName: Publish
+      git config user.email olilarkin@googlemail.com
+      git config user.name olilarkin
+      git add *
+      git commit -m "publish via pipeline"
+      git push origin master
+    displayName: Publish to github pages
 
 # - job: BUILD_MAC_TOOLS
 #   condition: and(eq(variables.buildTools, false), eq(variables.buildMac, true))
