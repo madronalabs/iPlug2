@@ -55,10 +55,14 @@ steps:
     displayName: Publish ${{ parameters.name }} WAM
 
   - bash: |
-      #build again with origin 
+      #build again with origin
+      cd emsdk
+      source ./emsdk_env.sh
+      cd ..
       cd ./${{ parameters.path }}/${{ parameters.name }}/scripts
       ./makedist-web.sh off ${{ parameters.origin }}
-
+      # --
+      
       cd ..
       mv ./build-web/* $BUILD_ARTIFACTSTAGINGDIRECTORY
       git reset --hard HEAD
