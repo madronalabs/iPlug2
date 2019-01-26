@@ -4,25 +4,32 @@ parameters:
   graphics: 'NANOVG'
   target: ''
   artifactName: ''
-  repo: 'none'
+  srcRepo: 'none' # the git repository to clone into path/name for building
+  srcBranch: 'master' # the branch to clone for building
+  #WEB AUDIO MODULE publishing via git
+  publishRepo: '' # the git repository to publish the WAM to
+  publishBranch: gh_pages # the branch to publish the WAM to
+  publishOrigin: '' # the origin URL where the WAM will be hosted. NOTE: should end with / 
+  user: '' # the git username to commit with when publishing
+  email: '' # the git email address to commit with when publishing
 
 steps:
   - bash: |
-      echo repo parameter = ${{ parameters.repo }}
-      if [ ${{ parameters.repo }} != none ]
+      echo srcRepo parameter = ${{ parameters.srcRepo }}
+      if [ ${{ parameters.srcRepo }} != none ]
       then
         if [ ! -d ./${{ parameters.path }} ]
         then
           mkdir -p ./${{ parameters.path }}
         fi
         cd ./${{ parameters.path }}
-        git clone --recursive ${{ parameters.repo }} ${{ parameters.name }}
+        git clone --recursive -b ${{ parameters.srcBranch }} ${{ parameters.srcRepo }} ${{ parameters.name }}
       else
-        echo no remote repository argument supplied, building local project ${{ parameters.path }}/${{ parameters.name }} ... 
+        echo no remote srcRepository argument supplied, building local project ${{ parameters.path }}/${{ parameters.name }} ... 
       fi
     env:
       GITHUB_PAT: $(GITHUB_PAT)
-    displayName: (Optionally) clone ${{ parameters.name }} repository
+    displayName: (Optionally) clone ${{ parameters.name }} repo
   
   - bash: |
       graphics=${{ parameters.graphics }}
@@ -60,17 +67,16 @@ steps:
       source ./emsdk_env.sh
       cd ..
       cd ./${{ parameters.path }}/${{ parameters.name }}/scripts
-      ./makedist-web.sh off ${{ parameters.origin }}
+      ./makedist-web.sh off ${{ parameters.publishOrigin }}
       # --
 
       cd ..
       mv ./build-web/* $BUILD_ARTIFACTSTAGINGDIRECTORY
-      git reset --hard HEAD
-      git checkout gh-pages
-      rm -r *  
+      rm -r *
+      git checkout ${{ parameters.publishRepo }} ${{ parameters.publishBranch }}
       mv $BUILD_ARTIFACTSTAGINGDIRECTORY/* .
-      git config user.email ${{ parameters.gitEmail }}
-      git config user.name ${{ parameters.gitUser }}
+      git config user.email ${{ parameters.email }}
+      git config user.name ${{ parameters.user }}
       git add *
       git commit -m "publish ${{ parameters.name }}"
       git push origin
