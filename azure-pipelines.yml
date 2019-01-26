@@ -3,13 +3,12 @@ variables:
   downloadDEPS: true
   buildWeb: true
   buildMac: false
-  buildWin: false
+  buildWin: true
   buildNANOVG: true;
   buildLICE: false;
   buildCAIRO: false;
   buildAGG: false;
   buildCANVAS: false;
-
   # buildInstallers: false #if true, the mac/win projects will build installers, rather than packaging individual binaries
   configuration: 'Release'
   target: 'All'
@@ -18,7 +17,6 @@ trigger:
 - azure-pipelines
 
 jobs:
-
 # this job checks out the repository and optionally downloads pre-built dependencies, depending on buildDEPS
 - job: DOWNLOAD_DEPS
   condition: eq(variables.downloadDEPS, true)
