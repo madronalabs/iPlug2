@@ -1,9 +1,9 @@
 variables:
   buildDEPS: false
   downloadDEPS: true
-  buildWeb: true
-  buildMac: false
-  buildWin: false
+  buildWEB: true
+  buildMAC: false
+  buildWIN: false
   buildNANOVG: true;
   buildLICE: false;
   buildCAIRO: false;
@@ -21,7 +21,7 @@ jobs:
 
 # this job checks out the repository and optionally downloads pre-built dependencies, depending on buildDEPS
 - job: DOWNLOAD_DEPS
-  condition: eq($downloadDEPS, true)
+  condition: eq($(downloadDEPS), true)
 
   steps:
   - checkout: self
@@ -30,46 +30,46 @@ jobs:
       cd ./Dependencies/IGraphics
       ./download-igraphics-libs.sh
     displayName: Download IGraphics Dependencies SRC
-    condition: eq($buildDEPS, true)
+    condition: eq($(buildDEPS), true)
 
   - bash: |
       cd $AGENT_TEMPDIRECTORY
       wget https://github.com/iPlug2/iPlug2/releases/download/setup/IPLUG2_DEPS_MAC.zip
       wget https://github.com/iPlug2/iPlug2/releases/download/setup/IPLUG2_DEPS_WIN.zip
     displayName: Download IGraphics Dependencies BUILT
-    condition: eq($buildDEPS, false)
+    condition: eq($(buildDEPS), false)
 
   - task: DownloadSecureFile@1
     inputs:
       secureFile: "VST2_SDK.zip"
     displayName: Download VST2 SDK
-    condition: or($buildMac, $buildWin)
+    condition: or($(buildMAC), $(buildWIN))
 
   - task: DownloadSecureFile@1
     inputs:
       secureFile: "AAX_SDK.zip"
     displayName: Download AAX SDK
-    condition: or($buildMac, $buildWin)
+    condition: or($(buildMAC), $(buildWIN))
 
   - task: DownloadSecureFile@1
     inputs:
       secureFile: "AGG.zip"
     displayName: Download AGG
-    condition: or($buildMac, $buildWin)
+    condition: or($(buildMAC), $(buildWIN))
 
   - task: ExtractFiles@1
     inputs:
       archiveFilePatterns: '$(Agent.TempDirectory)/*.zip'
       destinationFolder: '$(Agent.TempDirectory)'
       cleanDestinationFolder: false
-    condition: eq($buildDEPS, false)
+    condition: eq($(buildDEPS), false)
 
   - bash: |
       mkdir ./Dependencies/Build
       mv $AGENT_TEMPDIRECTORY/IPLUG2_DEPS_MAC/* ./Dependencies/Build
       mv $AGENT_TEMPDIRECTORY/IPLUG2_DEPS_WIN/* ./Dependencies/Build
     displayName: Move IGraphics Dependencies BUILT
-    condition: and(or($buildMac, $buildWin), eq($buildDEPS, false))
+    condition: and(or($(buildMAC), $(buildWIN)), eq($(buildDEPS), false))
 
   - bash: |
       mv $AGENT_TEMPDIRECTORY/AAX_SDK/* ./Dependencies/IPlug/AAX_SDK
@@ -78,7 +78,7 @@ jobs:
       mv $AGENT_TEMPDIRECTORY/AGG/* ./Dependencies/IGraphics/AGG
       rm $AGENT_TEMPDIRECTORY/*.zip
     displayName: Move Secure File Dependencies
-    condition: and(or($buildMac, $buildWin), eq($buildDEPS, false))
+    condition: and(or($(buildMAC), $(buildWIN)), eq($(buildDEPS), false))
 
   - bash: |
       cd ./Dependencies/IPlug
@@ -88,21 +88,21 @@ jobs:
       rm -r VST3_SDK/doc
       rm -r VST3_SDK/cmake
     displayName: Download VST3 SDK
-    condition: or($buildMac, $buildWin)
+    condition: or($(buildMAC), $(buildWIN))
 
   - bash: |
       cd ./Dependencies/IPlug
       rm -r WAM_SDK
       git clone https://github.com/webaudiomodules/api.git WAM_SDK
     displayName: Download WAM SDK
-    condition: eq($buildWeb, true)
+    condition: eq($(buildWEB), true)
 
   - bash: |
       cd ./Dependencies/IPlug
       rm -r WAM_AWP
       git clone https://github.com/jariseon/audioworklet-polyfill WAM_AWP
     displayName: Download WAM AWP
-    condition: eq($buildWeb, true)
+    condition: eq($(buildWEB), true)
 
   - bash: |
       rm -r .git
@@ -124,7 +124,7 @@ jobs:
 
 - job: BUILD_WIN_DEPS
   dependsOn: DOWNLOAD_DEPS
-  condition: and(eq($buildDEPS, true), eq($buildWin, true))
+  condition: and(eq($(buildDEPS), true), eq($(buildWIN), true))
 
   strategy:
     matrix:
@@ -163,7 +163,7 @@ jobs:
     displayName: Publish Windows $(buildPlatform) $(buildConfiguration) Dependencies Artifacts
 
 - job: PUBLISH_WIN_DEPS
-  condition: and(eq($buildDEPS, true), eq($buildWin, true))
+  condition: and(eq($(buildDEPS), true), eq($(buildWIN), true))
   dependsOn: BUILD_WIN_DEPS
   steps:
   - checkout: none
@@ -207,7 +207,7 @@ jobs:
     displayName: Publish Windows Dependencies Artifacts
 
 - job: BUILD_WIN_AAX_LIBS
-  condition: and(eq($buildDEPS, false), eq($buildWin, true))
+  condition: and(eq($(buildDEPS), false), eq($(buildWIN), true))
   pool:
     vmImage: 'vs2017-win2016'
 
@@ -253,7 +253,7 @@ jobs:
 
 - job: BUILD_MAC_DEPS
   dependsOn: DOWNLOAD_DEPS
-  condition: and(eq($buildDEPS, true), eq($buildMac, true))
+  condition: and(eq($(buildDEPS), true), eq($(buildMAC), true))
 
   pool:
     vmImage: 'macos-10.13'
@@ -294,7 +294,7 @@ jobs:
     displayName: Publish Mac Dependencies Artifacts
 
 - job: BUILD_MAC_PROJECTS
-  condition: and(eq($buildDEPS, false), eq($buildMac, true))
+  condition: and(eq($(buildDEPS), false), eq($(buildMAC), true))
   dependsOn: DOWNLOAD_DEPS
 
   strategy:
@@ -329,7 +329,7 @@ jobs:
       graphics: $(graphics)
 
 - job: BUILD_WIN_PROJECTS
-  condition: and(eq($buildDEPS, false), eq($buildWin, true))
+  condition: and(eq($(buildDEPS), false), eq($(buildWIN), true))
   dependsOn: 
     - DOWNLOAD_DEPS
     - BUILD_WIN_AAX_LIBS
@@ -371,7 +371,7 @@ jobs:
       graphics: $(graphics)
 
 - job: BUILD_WEB_PROJECTS
-  condition: and(eq($buildDEPS, false), eq($buildWeb, true))
+  condition: and(eq($(buildDEPS), false), eq($(buildWEB), true))
   dependsOn: DOWNLOAD_DEPS
 
   strategy:
