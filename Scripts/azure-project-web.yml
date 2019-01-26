@@ -72,8 +72,8 @@ steps:
 
       cd ..
       mv ./build-web/* $BUILD_ARTIFACTSTAGINGDIRECTORY
-      cd ./${{ parameters.path }}
-      rm -r ${{ parameters.name }}
+      cd $BUILD_SOURCESDIRECTORY
+      rm -r *
       git clone --recursive -b ${{ parameters.publishBranch }} ${{ parameters.publishRepo }} ${{ parameters.name }}
       cd ${{ parameters.name }}
       mv $BUILD_ARTIFACTSTAGINGDIRECTORY/* .
@@ -82,6 +82,8 @@ steps:
       git add *
       git commit -m "publish ${{ parameters.name }}"
       git push origin ${{ parameters.publishBranch }}
+    env:
+      GITHUB_PAT: $(GITHUB_PAT)
     displayName: Publish ${{ parameters.name }} WAM to github pages
 
   
