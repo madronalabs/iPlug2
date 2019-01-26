@@ -62,8 +62,7 @@ steps:
       git config user.email olilarkin@googlemail.com
       git config user.name olilarkin
       git add *
-      git status
-      git commit -m publish ${{ parameters.name }}
+      git commit -m "publish ${{ parameters.name }}"
     displayName: Publish ${{ parameters.name }} WAM to github pages
 
   
