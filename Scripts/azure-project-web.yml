@@ -56,7 +56,7 @@ steps:
   - bash: |
       cd ./${{ parameters.path }}/${{ parameters.name }}
       git branch gh-pages
-      git mv ./build-web/* .
+      mv ./build-web/* .
       git config core.autocrlf false
       git config user.email olilarkin@googlemail.com
       git config user.name olilarkin

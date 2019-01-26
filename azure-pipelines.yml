@@ -43,16 +43,19 @@ jobs:
     inputs:
       secureFile: "VST2_SDK.zip"
     displayName: Download VST2 SDK
+    condition: or(variables.buildMac, variables.buildWin)
 
   - task: DownloadSecureFile@1
     inputs:
       secureFile: "AAX_SDK.zip"
     displayName: Download AAX SDK
+    condition: or(variables.buildMac, variables.buildWin)
 
   - task: DownloadSecureFile@1
     inputs:
       secureFile: "AGG.zip"
     displayName: Download AGG
+    condition: or(variables.buildMac, variables.buildWin)
 
   - task: ExtractFiles@1
     inputs:
@@ -66,7 +69,7 @@ jobs:
       mv $AGENT_TEMPDIRECTORY/IPLUG2_DEPS_MAC/* ./Dependencies/Build
       mv $AGENT_TEMPDIRECTORY/IPLUG2_DEPS_WIN/* ./Dependencies/Build
     displayName: Move IGraphics Dependencies BUILT
-    condition: eq(variables.buildDEPS, false)
+    condition: and(or(variables.buildMac, variables.buildWin), eq(variables.buildDEPS, false))
 
   - bash: |
       mv $AGENT_TEMPDIRECTORY/AAX_SDK/* ./Dependencies/IPlug/AAX_SDK
@@ -75,6 +78,7 @@ jobs:
       mv $AGENT_TEMPDIRECTORY/AGG/* ./Dependencies/IGraphics/AGG
       rm $AGENT_TEMPDIRECTORY/*.zip
     displayName: Move Secure File Dependencies
+    condition: and(or(variables.buildMac, variables.buildWin), eq(variables.buildDEPS, false))
 
   - bash: |
       cd ./Dependencies/IPlug
@@ -84,18 +88,21 @@ jobs:
       rm -r VST3_SDK/doc
       rm -r VST3_SDK/cmake
     displayName: Download VST3 SDK
+    condition: or(variables.buildMac, variables.buildWin)
 
   - bash: |
       cd ./Dependencies/IPlug
       rm -r WAM_SDK
       git clone https://github.com/webaudiomodules/api.git WAM_SDK
     displayName: Download WAM SDK
+    condition: eq(variables.buildWeb, true)
 
   - bash: |
       cd ./Dependencies/IPlug
       rm -r WAM_AWP
       git clone https://github.com/jariseon/audioworklet-polyfill WAM_AWP
     displayName: Download WAM AWP
+    condition: eq(variables.buildWeb, true)
 
   - bash: |
       rm -r .git
