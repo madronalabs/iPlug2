@@ -418,6 +418,7 @@ jobs:
       git clone https://github.com/iPlug2/iPlug2.github.io.git $BUILD_SOURCESDIRECTORY
       rm -r ./canvas/*
       rm -r ./webgl/*
+      ls -la
     displayName: Clone website repo
 
   - task: DownloadPipelineArtifact@0
@@ -430,14 +431,14 @@ jobs:
       artifactName: 'WEB_IPlugEffect_CANVAS'
       targetPath: '$(Agent.TempDirectory)'
 
-  - task: ExtractFiles@1
-    inputs:
-      archiveFilePatterns: '$(Agent.TempDirectory)/*.zip'
-      destinationFolder: '$(Agent.TempDirectory)'
-      cleanDestinationFolder: false
-    condition: eq(variables.buildDEPS, false)
+  # - task: ExtractFiles@1
+  #   inputs:
+  #     archiveFilePatterns: '$(Agent.TempDirectory)/*.zip'
+  #     destinationFolder: '$(Agent.TempDirectory)'
+  #     cleanDestinationFolder: false
 
   - bash: |
+      ls -la $AGENT_TEMPDIRECTORY
       mkdir ./canvas/IPlugEffect
       mkdir ./webgl/IPlugEffect
       mv $AGENT_TEMPDIRECTORY/WEB_IPlugEffect_CANVAS/* ./canvas/IPlugEffect
