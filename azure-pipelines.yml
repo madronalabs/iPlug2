@@ -431,6 +431,12 @@ jobs:
       targetPath: 'canvas/IPlugEffect'
 
   - bash: |
+      sed -i.bak s,var origin = "/";,https://iplug2.github.io/webgl/,g ./webgl/IPlugEffect/scripts/IPlugEffect-awn.js
+      sed -i.bak s,var origin = "/";,https://iplug2.github.io/canvas/,g ./canvas/IPlugEffect/scripts/IPlugEffect-awn.js
+      rm  ./webgl/IPlugEffect/scripts/scripts/*.bak
+      rm  ./canvas/IPlugEffect/scripts/scripts/*.bak
+
+  - bash: |
       git config user.email olilarkin@googlemail.com
       git config user.name olilarkin
       git add *
