@@ -431,8 +431,8 @@ jobs:
       targetPath: 'canvas/IPlugEffect'
 
   - bash: |
-      sed -i.bak 's,var origin = "/";,var origin = "https://iplug2.github.io/webgl";,g' ./webgl/IPlugEffect/scripts/IPlugEffect-awn.js
-      sed -i.bak 's,var origin = "/";,var origin = "https://iplug2.github.io/canvas";,g' ./canvas/IPlugEffect/scripts/IPlugEffect-awn.js
+      sed -i.bak 's,var origin = "/";,var origin = "https://iplug2.github.io/webgl/IPlugEffect/";,g' ./webgl/IPlugEffect/scripts/IPlugEffect-awn.js
+      sed -i.bak 's,var origin = "/";,var origin = "https://iplug2.github.io/canvas/IPlugEffect/";,g' ./canvas/IPlugEffect/scripts/IPlugEffect-awn.js
       rm  ./webgl/IPlugEffect/scripts/*.bak
       rm  ./canvas/IPlugEffect/scripts/*.bak
 
