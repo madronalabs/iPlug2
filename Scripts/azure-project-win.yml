@@ -4,25 +4,26 @@ parameters:
   graphics: 'NANOVG'
   target: 'All'
   artifactName: ''
-  repo: 'none'
+  srcRepo: 'none'
+  srcBranch: 'master'
 
 steps:
   - bash: |
-      echo repo parameter = ${{ parameters.repo }}
-      if [ ${{ parameters.repo }} != none ]
+      echo srcRepo parameter = ${{ parameters.srcRepo }}
+      if [ ${{ parameters.srcRepo }} != none ]
       then
         if [ ! -d ./${{ parameters.path }} ]
-        then
+        then  
           mkdir -p ./${{ parameters.path }}
         fi
         cd ./${{ parameters.path }}
-        git clone --recursive ${{ parameters.repo }} ${{ parameters.name }}
+        git clone --recursive -b ${{ parameters.srcBranch }} ${{ parameters.srcRepo }} ${{ parameters.name }}
       else
-        echo no remote repository argument supplied, building local project ${{ parameters.path }}/${{ parameters.name }} ... 
+        echo no remote repo argument supplied, building local project ${{ parameters.path }}/${{ parameters.name }} ... 
       fi
     env:
       GITHUB_PAT: $(GITHUB_PAT)
-    displayName: (Optionally) clone ${{ parameters.name }} repository
+    displayName: (Optionally) clone ${{ parameters.name }} repo
 
   - bash: |
       graphics=${{ parameters.graphics }}

@@ -25,7 +25,7 @@ steps:
         cd ./${{ parameters.path }}
         git clone --recursive -b ${{ parameters.srcBranch }} ${{ parameters.srcRepo }} ${{ parameters.name }}
       else
-        echo no remote srcRepository argument supplied, building local project ${{ parameters.path }}/${{ parameters.name }} ... 
+        echo no remote repo argument supplied, building local project ${{ parameters.path }}/${{ parameters.name }} ... 
       fi
     env:
       GITHUB_PAT: $(GITHUB_PAT)
@@ -79,7 +79,7 @@ steps:
       git config user.name ${{ parameters.user }}
       git add *
       git commit -m "publish ${{ parameters.name }}"
-      git push origin
+      git push origin ${{ parameters.publishBranch }}
     displayName: Publish ${{ parameters.name }} WAM to github pages
 
   
