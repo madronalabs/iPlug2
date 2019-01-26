@@ -59,11 +59,10 @@ steps:
       git checkout gh-pages
       mv ./build-web/* .
       rm -r ./build-web
-      git config core.autocrlf false
       git config user.email olilarkin@googlemail.com
       git config user.name olilarkin
-      pwd
-      git add ./*
+      git add *
+      git status
       git commit -m publish ${{ parameters.name }}
     displayName: Publish ${{ parameters.name }} WAM to github pages
 
