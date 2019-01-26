@@ -55,22 +55,22 @@ steps:
     displayName: Publish ${{ parameters.name }} WAM
 
   - bash: |
-      #build again with origin
+      #build again with origin - this is overkill, just to customise the origin in awn script
       cd emsdk
       source ./emsdk_env.sh
       cd ..
       cd ./${{ parameters.path }}/${{ parameters.name }}/scripts
       ./makedist-web.sh off ${{ parameters.origin }}
       # --
-      
+
       cd ..
       mv ./build-web/* $BUILD_ARTIFACTSTAGINGDIRECTORY
       git reset --hard HEAD
       git checkout gh-pages
       rm -r *  
       mv $BUILD_ARTIFACTSTAGINGDIRECTORY/* .
-      git config user.email olilarkin@googlemail.com
-      git config user.name olilarkin
+      git config user.email ${{ parameters.gitEmail }}
+      git config user.name ${{ parameters.gitUser }}
       git add *
       git commit -m "publish ${{ parameters.name }}"
       git push origin
