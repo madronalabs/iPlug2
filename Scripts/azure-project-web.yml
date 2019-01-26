@@ -76,6 +76,7 @@ steps:
       rm -r *
       git clone --recursive -b ${{ parameters.publishBranch }} ${{ parameters.publishRepo }} ${{ parameters.name }}
       cd ${{ parameters.name }}
+      rm -r scripts
       mv $BUILD_ARTIFACTSTAGINGDIRECTORY/* .
       git config user.email ${{ parameters.email }}
       git config user.name ${{ parameters.user }}
