@@ -22,7 +22,6 @@ steps:
       fi
     env:
       GITHUB_PAT: $(GITHUB_PAT)
-
     displayName: (Optionally) clone ${{ parameters.name }} repository
 
   - bash: |

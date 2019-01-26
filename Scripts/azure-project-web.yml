@@ -38,6 +38,7 @@ steps:
       source ./emsdk_env.sh
       cd ..
       cd ./${{ parameters.path }}/${{ parameters.name }}/scripts
+      ls -la
       ./makedist-web.sh off
     displayName: Compile ${{ parameters.name }} WAM
 
