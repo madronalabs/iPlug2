@@ -77,7 +77,7 @@ steps:
       mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.app* $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
 
       #if we are building a project with plug-ins
-      if [ -d ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst3* ] #todo: check something else
+      if [ -d ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst3 ] #todo: check something else
       then
         mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
         mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
