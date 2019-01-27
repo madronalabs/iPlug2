@@ -449,8 +449,8 @@ jobs:
       gitHubConnection: olilarkin
       repositoryName: 'iPlug2/iPlug2.github.io'
       action: 'edit' 
-      target: 'f1b9f1c'
-      tagSource: 'auto' 
+      target: 'master'
+      # tagSource: 'auto' 
       tag: 'latest'
       title: 'iPlug 2 Examples'
       releaseNotes: 'Here you can download binaries of the iPlug 2 examples and tests, built by continuous integration.\n\nNo binaries are code-signed, so they may not work in hosts that require a valid signature.'
