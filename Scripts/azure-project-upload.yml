@@ -2,7 +2,6 @@
   name: ''
   platformStr: ''
   graphics: ''
-  releaseNotes: 'Here you can download binaries of the iPlug 2 examples and tests, built by continuous integration.\n\nNo binaries are code-signed, so they may not work in hosts that require a valid signature.'
   justApp: false
 
  steps:
@@ -23,152 +22,48 @@
         git add *
         git commit -m "publish via pipeline"
         git push origin master
-      displayName: Publish to github pages
+      displayName: Publish WEB_${{parameters.name}}_${{parameters.graphics}} to github pages
 
   - ${{ if or(eq(parameters.platformStr, 'MAC'), eq(parameters.platformStr, 'WIN')) }}:
     - bash: |
         rm -r $BUILD_BINARIESDIRECTORY
-      displayName: empty binaries directory
+      displayName: Empty binaries directory
       
-    - task: DownloadPipelineArtifact@0
-      inputs:
-        artifactName: '${{parameters.platformStr}}_APP_${{parameters.name}}_${{parameters.graphics}}'
-        targetPath: '$(Build.BinariesDirectory)/APP'
+    - template: azure-project-upload-release.yml
+      parameters:
+        name: '${{parameters.name}}'
+        platformStr: '${{parameters.platformStr}}'
+        graphics: '${{parameters.graphics}}'
+        pluginType: 'APP'
 
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(Build.BinariesDirectory)/APP'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_APP_${{parameters.name}}_${{parameters.graphics}}.zip' 
-        includeRootFolder: false
+    - ${{ if not(parameters.justApp) }}:
+      - template: azure-project-upload-release.yml
+        parameters:
+          name: '${{parameters.name}}'
+          platformStr: '${{parameters.platformStr}}'
+          graphics: '${{parameters.graphics}}'
+          pluginType: 'VST2'
 
-    - task: GithubRelease@0
-      inputs:
-        gitHubConnection: olilarkin
-        repositoryName: 'iPlug2/iPlug2.github.io'
-        action: 'edit' 
-        target: 'master'
-        tag: 'latest'
-        title: 'iPlug 2 Examples'
-        releaseNotes: ${{parameters.releaseNotes}}
-        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_APP_${{parameters.name}}_${{parameters.graphics}}.zip'
-        assetUploadMode: 'replace'
-        isDraft: true
-        isPreRelease: true
-        addChangeLog: false
+    - ${{ if not(parameters.justApp) }}:
+      - template: azure-project-upload-release.yml
+        parameters:
+          name: '${{parameters.name}}'
+          platformStr: '${{parameters.platformStr}}'
+          graphics: '${{parameters.graphics}}'
+          pluginType: 'VST3'
 
-    - task: DownloadPipelineArtifact@0
-      inputs:
-        artifactName: '${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}'
-        targetPath: '$(Build.BinariesDirectory)/VST2'
-      condition: eq(${{parameters.justApp}}, false)
+    - ${{ if not(parameters.justApp) }}:
+      - template: azure-project-upload-release.yml
+        parameters:
+          name: '${{parameters.name}}'
+          platformStr: '${{parameters.platformStr}}'
+          graphics: '${{parameters.graphics}}'
+          pluginType: 'AAX'
 
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(Build.BinariesDirectory)/VST2'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}.zip' 
-        includeRootFolder: false
-      condition: eq(${{parameters.justApp}}, false)
-
-    - task: GithubRelease@0
-      inputs:
-        gitHubConnection: olilarkin
-        repositoryName: 'iPlug2/iPlug2.github.io'
-        action: 'edit' 
-        target: 'master'
-        tag: 'latest'
-        title: 'iPlug 2 Examples'
-        releaseNotes: ${{parameters.releaseNotes}}
-        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}.zip'
-        assetUploadMode: 'replace'
-        isDraft: true
-        isPreRelease: true
-        addChangeLog: false
-      condition: eq(${{parameters.justApp}}, false)
-
-    - task: DownloadPipelineArtifact@0
-      inputs:
-        artifactName: '${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}'
-        targetPath: '$(Build.BinariesDirectory)/VST3'
-      condition: eq(${{parameters.justApp}}, false)
-
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(Build.BinariesDirectory)/VST3'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}.zip' 
-        includeRootFolder: false
-      condition: eq(${{parameters.justApp}}, false)
-
-    - task: GithubRelease@0
-      inputs:
-        gitHubConnection: olilarkin
-        repositoryName: 'iPlug2/iPlug2.github.io'
-        action: 'edit' 
-        target: 'master'
-        tag: 'latest'
-        title: 'iPlug 2 Examples'
-        releaseNotes: ${{parameters.releaseNotes}}
-        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}.zip'
-        assetUploadMode: 'replace'
-        isDraft: true
-        isPreRelease: true
-        addChangeLog: false
-      condition: eq(${{parameters.justApp}}, false)
-
-    - task: DownloadPipelineArtifact@0
-      inputs:
-        artifactName: '${{parameters.platformStr}}_AAX_${{parameters.name}}_${{parameters.graphics}}'
-        targetPath: '$(Build.BinariesDirectory)/AAX'
-      condition: eq(${{parameters.justApp}}, false)
-
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(Build.BinariesDirectory)/AAX'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AAX_${{parameters.name}}_${{parameters.graphics}}.zip' 
-        includeRootFolder: false
-      condition: eq(${{parameters.justApp}}, false)
-
-    - task: GithubRelease@0
-      inputs:
-        gitHubConnection: olilarkin
-        repositoryName: 'iPlug2/iPlug2.github.io'
-        action: 'edit' 
-        target: 'master'
-        tag: 'latest'
-        title: 'iPlug 2 Examples'
-        releaseNotes: ${{parameters.releaseNotes}}
-        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AAX_${{parameters.name}}_${{parameters.graphics}}.zip'
-        assetUploadMode: 'replace'
-        isDraft: true
-        isPreRelease: true
-        addChangeLog: false
-      condition: eq(${{parameters.justApp}}, false)
-
-  - ${{ if eq(parameters.platformStr, 'MAC') }}:
-    - task: DownloadPipelineArtifact@0
-      inputs:
-        artifactName: '${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}'
-        targetPath: '$(Build.BinariesDirectory)/AUv2'
-      condition: eq(${{parameters.justApp}}, false)
-
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(Build.BinariesDirectory)/AUv2'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}.zip' 
-        includeRootFolder: false
-      condition: eq(${{parameters.justApp}}, false)
-
-    - task: GithubRelease@0
-      inputs:
-        gitHubConnection: olilarkin
-        repositoryName: 'iPlug2/iPlug2.github.io'
-        action: 'edit' 
-        target: 'master'
-        tag: 'latest'
-        title: 'iPlug 2 Examples'
-        releaseNotes: ${{parameters.releaseNotes}}
-        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}.zip'
-        assetUploadMode: 'replace'
-        isDraft: true
-        isPreRelease: true
-        addChangeLog: false
-      condition: eq(${{parameters.justApp}}, false)
+    - ${{ if and(eq(parameters.platformStr, 'MAC'), not(parameters.justApp)) }}:
+      - template: azure-project-upload-release.yml
+        parameters:
+          name: '${{parameters.name}}'
+          platformStr: '${{parameters.platformStr}}'
+          graphics: '${{parameters.graphics}}'
+          pluginType: 'AUv2'
