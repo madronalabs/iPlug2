@@ -91,9 +91,9 @@
       addChangeLog: false
 
   - task: DownloadPipelineArtifact@0
-  inputs:
-    artifactName: '${{parameters.platformStr}}_APP_${{parameters.name}}_${{parameters.graphics}}'
-    targetPath: '$(Build.BinariesDirectory)/APP'
+    inputs:
+      artifactName: '${{parameters.platformStr}}_APP_${{parameters.name}}_${{parameters.graphics}}'
+      targetPath: '$(Build.BinariesDirectory)/APP'
 
   - task: ArchiveFiles@2
     inputs:
@@ -116,9 +116,9 @@
       addChangeLog: false
 
   - task: DownloadPipelineArtifact@0
-  inputs:
-    artifactName: '${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}'
-    targetPath: '$(Build.BinariesDirectory)/AUv2'
+    inputs:
+      artifactName: '${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}'
+      targetPath: '$(Build.BinariesDirectory)/AUv2'
 
   - task: ArchiveFiles@2
     inputs:
