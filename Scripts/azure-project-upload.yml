@@ -23,7 +23,6 @@
       targetPath: '$(Build.ArtifactStagingDirectory)'
 
   - bash: |
-      ls -la $BUILD_ARTIFACTSTAGINGDIRECTORY
       sed -i.bak 's,var origin = "/";,var origin = "https://iplug2.github.io/webgl/${{parameters.name}}/";,g' ./webgl/${{parameters.name}}/scripts/${{parameters.name}}-awn.js
       sed -i.bak 's,var origin = "/";,var origin = "https://iplug2.github.io/canvas/${{parameters.name}}/";,g' ./canvas/${{parameters.name}}/scripts/${{parameters.name}}-awn.js
       rm  ./webgl/${{parameters.name}}/scripts/*.bak
