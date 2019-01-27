@@ -1,7 +1,7 @@
 variables:
   buildDEPS: false
   downloadDEPS: true
-  buildWeb: false
+  buildWeb: true
   buildMac: true
   buildWin: true
   # buildNANOVG: true;
@@ -443,6 +443,13 @@ jobs:
       platform: azure-project-upload.yml
       graphics: $(graphics)
       platformStr: 'WIN'
+
+  - template: Scripts/azure-project_list.yml
+    parameters:
+      platform: azure-project-upload.yml
+      graphics: $(graphics)
+      platformStr: 'WEB'
+    condition: or(eq($(graphics), 'NANOVG'), eq($(graphics), 'CANVAS'))
 
   - bash: |
       git config user.email olilarkin@googlemail.com
