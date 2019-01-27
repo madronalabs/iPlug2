@@ -322,9 +322,9 @@ jobs:
 
   - template: Scripts/azure-get_src.yml
 
-  - template: Scripts/azure-project_list.yml
+  - template: azure-projects.yml
     parameters:
-      platform: azure-project-mac.yml
+      platform: Scripts/azure-project-mac.yml
       graphics: $(graphics)
 
 - job: BUILD_WIN_PROJECTS
@@ -361,9 +361,9 @@ jobs:
       artifactName: 'DEPS_AAX_LIB_WIN'
       targetPath: 'Dependencies/IPlug/AAX_SDK/Libs/'
 
-  - template: Scripts/azure-project_list.yml
+  - template: azure-projects.yml
     parameters:
-      platform: azure-project-win.yml
+      platform: Scripts/azure-project-win.yml
       graphics: $(graphics)
 
 - job: BUILD_WEB_PROJECTS
@@ -375,10 +375,9 @@ jobs:
       NANOVG:
         graphics: 'NANOVG'
         condition: eq(variables.buildNANOVG, true)
-
-      CANVAS:
-        graphics: 'CANVAS'
-        condition: eq(variables.buildCANVAS, true)
+      # CANVAS:
+      #   graphics: 'CANVAS'
+      #   condition: eq(variables.buildCANVAS, true)
 
   pool:
     vmImage: 'ubuntu-16.04'
@@ -395,9 +394,9 @@ jobs:
 
   - template: Scripts/azure-get_src.yml
 
-  - template: Scripts/azure-project_list.yml
+  - template: azure-projects.yml
     parameters:
-      platform: azure-project-web.yml
+      platform: Scripts/azure-project-web.yml
       graphics: $(graphics)
 
 - job: PUBLISH_IPLUG2_WEBSITE
@@ -423,7 +422,7 @@ jobs:
 
   pool:
     vmImage: 'macos-10.13' # maintain macOS permissions
-    
+
   steps:
   - checkout: none
 
@@ -433,21 +432,21 @@ jobs:
     env:
       GITHUB_PAT: $(GITHUB_PAT)
 
-  - template: Scripts/azure-project_list.yml
+  - template: azure-projects.yml
     parameters:
-      platform: azure-project-upload.yml
+      platform: Scripts/azure-project-upload.yml
       graphics: $(graphics)
       platformStr: 'MAC'
   
-  - template: Scripts/azure-project_list.yml
+  - template: azure-projects.yml
     parameters:
-      platform: azure-project-upload.yml
+      platform: Scripts/azure-project-upload.yml
       graphics: $(graphics)
       platformStr: 'WIN'
 
-  - template: Scripts/azure-project_list.yml
+  - template: azure-projects.yml
     parameters:
-      platform: azure-project-upload.yml
+      platform: Scripts/azure-project-upload.yml
       graphics: $(graphics)
       platformStr: 'WEB'
 

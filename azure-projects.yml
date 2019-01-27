@@ -5,7 +5,7 @@ parameters:
   target: 'All'
 
 steps:
-  # Your Project
+  # External Project
   # - template: ${{parameters.platform}}
   #   parameters:
   #     name: MyTestProject # the name of the iPlug2 project folder ... e.g. what you specified when duplicating IPlugEffect 
@@ -45,34 +45,34 @@ steps:
       platformStr: ${{parameters.platformStr}}
 
   #IPlugControls
-  # - template: ${{parameters.platform}}
-  #   parameters:
-  #     name: IPlugControls
-  #     path: 'Examples'
-  #     graphics: ${{parameters.graphics}}
-  #     target: ${{parameters.target}}
-  #     artifactName: IPlugControls_${{parameters.graphics}}
-  #     platformStr: ${{parameters.platformStr}}
+  - template: ${{parameters.platform}}
+    parameters:
+      name: IPlugControls
+      path: 'Examples'
+      graphics: ${{parameters.graphics}}
+      target: ${{parameters.target}}
+      artifactName: IPlugControls_${{parameters.graphics}}
+      platformStr: ${{parameters.platformStr}}
 
   # IPlugFaustDSP
-  # - template: ${{parameters.platform}}
-  #   parameters:
-  #     name: IPlugFaustDSP
-  #     path: 'Examples'
-  #     graphics: ${{parameters.graphics}}
-  #     target: ${{parameters.target}}
-  #     artifactName: IPlugFaustDSP_${{parameters.graphics}}
-  #   platformStr: ${{parameters.platformStr}}
+  - template: ${{parameters.platform}}
+    parameters:
+      name: IPlugFaustDSP
+      path: 'Examples'
+      graphics: ${{parameters.graphics}}
+      target: ${{parameters.target}}
+      artifactName: IPlugFaustDSP_${{parameters.graphics}}
+    platformStr: ${{parameters.platformStr}}
 
   # IGraphicsStressTest
-  # - template: ${{parameters.platform}}
-  #   parameters:
-  #     name: IGraphicsStressTest
-  #     path: 'Tests'
-  #     graphics: ${{parameters.graphics}}
-  #     target: ${{parameters.target}}
-  #     artifactName: IGraphicsStressTest_${{parameters.graphics}}
-  #     platformStr: ${{parameters.platformStr}}
+  - template: ${{parameters.platform}}
+    parameters:
+      name: IGraphicsStressTest
+      path: 'Tests'
+      graphics: ${{parameters.graphics}}
+      target: ${{parameters.target}}
+      artifactName: IGraphicsStressTest_${{parameters.graphics}}
+      platformStr: ${{parameters.platformStr}}
 
   #IGraphicsTest
   - template: ${{parameters.platform}}
