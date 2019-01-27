@@ -60,18 +60,22 @@ steps:
   #   displayName: Compile ${{ parameters.name }} Visual Studio Solution Win32
 
   - bash: |
-      mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
-      mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
-      mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
       mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
-      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}.vst3* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }} # must move VST3 first
-      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-vst3_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
-      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}_x64.dll $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
-      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-vst2_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
-      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}.aaxplugin* $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
-      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-aax_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
       mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}_x64.exe $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
       mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-app_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }} 
+
+      if [ -d ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}.vst3* ] #todo: check something else
+      then
+        mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
+        mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
+        mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
+        mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}.vst3* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }} # must move VST3 first
+        mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-vst3_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
+        mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}_x64.dll $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
+        mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-vst2_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
+        mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}.aaxplugin* $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
+        mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-aax_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
+      fi
     displayName: Organize artifacts
 
   - task: PublishPipelineArtifact@0
