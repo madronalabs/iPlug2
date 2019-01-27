@@ -444,20 +444,11 @@ jobs:
       graphics: $(graphics)
       platformStr: 'WIN'
 
-  - if or(eq($(graphics), 'NANOVG'), eq($(graphics), 'CANVAS')):
-    - template: Scripts/azure-project_list.yml
-      parameters:
-        platform: azure-project-upload.yml
-        graphics: $(graphics)
-        platformStr: 'WEB'
-
-  - bash: |
-      git config user.email olilarkin@googlemail.com
-      git config user.name olilarkin
-      git add *
-      git commit -m "publish via pipeline"
-      git push origin master
-    displayName: Publish to github pages
+  - template: Scripts/azure-project_list.yml
+    parameters:
+      platform: azure-project-upload.yml
+      graphics: $(graphics)
+      platformStr: 'WEB'
 
 # - job: BUILD_MAC_TOOLS
 #   condition: and(eq(variables.buildTools, false), eq(variables.buildMac, true))
