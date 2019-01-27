@@ -25,7 +25,7 @@
       rootFolderOrFile: '$(Build.BinariesDirectory)/VST2'
       archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}.zip' 
       includeRootFolder: false
-      
+
   - task: GithubRelease@0
     inputs:
       gitHubConnection: olilarkin
@@ -123,12 +123,14 @@
     inputs:
       artifactName: '${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}'
       targetPath: '$(Build.BinariesDirectory)/AUv2'
+    condition: eq(${{parameters.platformStr}}, 'MAC')
 
   - task: ArchiveFiles@2
     inputs:
       rootFolderOrFile: '$(Build.BinariesDirectory)/AUv2'
       archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}.zip' 
       includeRootFolder: false
+    condition: eq(${{parameters.platformStr}}, 'MAC')
 
   - task: GithubRelease@0
     inputs:
@@ -143,7 +145,9 @@
       assetUploadMode: 'replace'
       isDraft: true
       isPreRelease: true
-      addChangeLog: false        
+      addChangeLog: false
+    condition: eq(${{parameters.platformStr}}, 'MAC')
+     
   # - task: DownloadPipelineArtifact@0
   #   inputs:
   #     artifactName: '${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}'

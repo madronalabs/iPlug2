@@ -35,14 +35,15 @@ steps:
       platformStr: ${{parameters.platformStr}}
 
   # IPlugInstrument
-  # - template: ${{parameters.platform}}
-  #   parameters:
-  #     name: IPlugInstrument
-  #     path: 'Examples'
-  #     graphics: ${{parameters.graphics}}       
-  #     target: ${{parameters.target}}
-  #     artifactName: IPlugInstrument_${{parameters.graphics}}
-
+  - template: ${{parameters.platform}}
+    parameters:
+      name: IPlugInstrument
+      path: 'Examples'
+      graphics: ${{parameters.graphics}}       
+      target: ${{parameters.target}}
+      artifactName: IPlugInstrument_${{parameters.graphics}}
+      platformStr: ${{parameters.platformStr}}
+      
   # IPlugControls
   # - template: ${{parameters.platform}}
   #   parameters:

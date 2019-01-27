@@ -3,7 +3,7 @@ variables:
   downloadDEPS: true
   buildWeb: false
   buildMac: true
-  buildWin: false
+  buildWin: true
   # buildNANOVG: true;
   # buildLICE: false;
   # buildCAIRO: false;
@@ -338,18 +338,15 @@ jobs:
       NANOVG:
         graphics: 'NANOVG'
         condition: eq(variables.buildNANOVG, true)
-
-      # CAIRO:
-      #   graphics: 'CAIRO'
-      #   condition: eq(variables.buildCAIRO, true)
-      
-      # LICE:
-      #   graphics: 'LICE'
-      #   condition: eq(variables.buildLICE, true)
-
-      # AGG:
-      #   graphics: 'AGG'
-      #   condition: eq(variables.buildAGG, true)
+      CAIRO:
+        graphics: 'CAIRO'
+        condition: eq(variables.buildCAIRO, true)
+      LICE:
+        graphics: 'LICE'
+        condition: eq(variables.buildLICE, true)
+      AGG:
+        graphics: 'AGG'
+        condition: eq(variables.buildAGG, true)
 
   pool:
     vmImage: 'vs2017-win2016'
@@ -406,7 +403,7 @@ jobs:
 - job: PUBLISH_IPLUG2_WEBSITE
   dependsOn: 
     # - BUILD_WEB_PROJECTS
-    # - BUILD_WIN_PROJECTS
+    - BUILD_WIN_PROJECTS
     - BUILD_MAC_PROJECTS
     
   strategy:
@@ -441,6 +438,12 @@ jobs:
       graphics: $(graphics)
       platformStr: 'MAC'
   
+  - template: Scripts/azure-project_list.yml
+    parameters:
+      platform: azure-project-upload.yml
+      graphics: $(graphics)
+      platformStr: 'WIN'
+
   - bash: |
       git config user.email olilarkin@googlemail.com
       git config user.name olilarkin
