@@ -123,14 +123,14 @@
     inputs:
       artifactName: '${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}'
       targetPath: '$(Build.BinariesDirectory)/AUv2'
-    condition: eq(${{parameters.platformStr}}, 'MAC')
+    condition: eq(${{parameters.platformStr}}, MAC)
 
   - task: ArchiveFiles@2
     inputs:
       rootFolderOrFile: '$(Build.BinariesDirectory)/AUv2'
       archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}.zip' 
       includeRootFolder: false
-    condition: eq(${{parameters.platformStr}}, 'MAC')
+    condition: eq(${{parameters.platformStr}}, MAC)
 
   - task: GithubRelease@0
     inputs:
@@ -146,7 +146,7 @@
       isDraft: true
       isPreRelease: true
       addChangeLog: false
-    condition: eq(${{parameters.platformStr}}, 'MAC')
+    condition: eq(${{parameters.platformStr}}, MAC)
      
   # - task: DownloadPipelineArtifact@0
   #   inputs:
