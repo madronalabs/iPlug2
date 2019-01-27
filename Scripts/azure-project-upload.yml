@@ -24,7 +24,7 @@
       rootFolderOrFile: '$(Build.BinariesDirectory)/VST2'
       archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}.zip' 
 
- - task: DownloadPipelineArtifact@0
+  - task: DownloadPipelineArtifact@0
     inputs:
       artifactName: '${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}'
       targetPath: '$(Build.BinariesDirectory)/VST3'
