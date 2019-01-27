@@ -6,6 +6,8 @@ parameters:
   artifactName: ''
   srcRepo: 'none' # the git repository to clone into path/name for building
   srcBranch: 'master' # the branch to clone for building
+  justApp: false
+
   #WEB AUDIO MODULE publishing via git
   publishRepo: 'none' # the git repository to publish the WAM to
   publishBranch: gh-pages # the branch to publish the WAM to

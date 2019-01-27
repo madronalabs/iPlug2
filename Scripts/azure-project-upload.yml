@@ -3,6 +3,7 @@
   platformStr: ''
   graphics: ''
   releaseNotes: 'Here you can download binaries of the iPlug 2 examples and tests, built by continuous integration.\n\nNo binaries are code-signed, so they may not work in hosts that require a valid signature.'
+  justApp: false
 
  steps:
   - ${{ if eq(parameters.platformStr, 'WEB') }}:
@@ -28,85 +29,7 @@
     - bash: |
         rm -r $BUILD_BINARIESDIRECTORY
       displayName: empty binaries directory
-
-    - task: DownloadPipelineArtifact@0
-      inputs:
-        artifactName: '${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}'
-        targetPath: '$(Build.BinariesDirectory)/VST2'
-
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(Build.BinariesDirectory)/VST2'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}.zip' 
-        includeRootFolder: false
-
-    - task: GithubRelease@0
-      inputs:
-        gitHubConnection: olilarkin
-        repositoryName: 'iPlug2/iPlug2.github.io'
-        action: 'edit' 
-        target: 'master'
-        tag: 'latest'
-        title: 'iPlug 2 Examples'
-        releaseNotes: ${{parameters.releaseNotes}}
-        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}.zip'
-        assetUploadMode: 'replace'
-        isDraft: true
-        isPreRelease: true
-        addChangeLog: false
-
-    - task: DownloadPipelineArtifact@0
-      inputs:
-        artifactName: '${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}'
-        targetPath: '$(Build.BinariesDirectory)/VST3'
-
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(Build.BinariesDirectory)/VST3'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}.zip' 
-        includeRootFolder: false
-
-    - task: GithubRelease@0
-      inputs:
-        gitHubConnection: olilarkin
-        repositoryName: 'iPlug2/iPlug2.github.io'
-        action: 'edit' 
-        target: 'master'
-        tag: 'latest'
-        title: 'iPlug 2 Examples'
-        releaseNotes: ${{parameters.releaseNotes}}
-        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}.zip'
-        assetUploadMode: 'replace'
-        isDraft: true
-        isPreRelease: true
-        addChangeLog: false
-
-    - task: DownloadPipelineArtifact@0
-      inputs:
-        artifactName: '${{parameters.platformStr}}_AAX_${{parameters.name}}_${{parameters.graphics}}'
-        targetPath: '$(Build.BinariesDirectory)/AAX'
-
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(Build.BinariesDirectory)/AAX'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AAX_${{parameters.name}}_${{parameters.graphics}}.zip' 
-        includeRootFolder: false
-
-    - task: GithubRelease@0
-      inputs:
-        gitHubConnection: olilarkin
-        repositoryName: 'iPlug2/iPlug2.github.io'
-        action: 'edit' 
-        target: 'master'
-        tag: 'latest'
-        title: 'iPlug 2 Examples'
-        releaseNotes: ${{parameters.releaseNotes}}
-        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AAX_${{parameters.name}}_${{parameters.graphics}}.zip'
-        assetUploadMode: 'replace'
-        isDraft: true
-        isPreRelease: true
-        addChangeLog: false
-
+      
     - task: DownloadPipelineArtifact@0
       inputs:
         artifactName: '${{parameters.platformStr}}_APP_${{parameters.name}}_${{parameters.graphics}}'
@@ -133,17 +56,106 @@
         isPreRelease: true
         addChangeLog: false
 
+    - task: DownloadPipelineArtifact@0
+      inputs:
+        artifactName: '${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}'
+        targetPath: '$(Build.BinariesDirectory)/VST2'
+      condition: eq(${{parameters.justApp}}, false)
+
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)/VST2'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}.zip' 
+        includeRootFolder: false
+      condition: eq(${{parameters.justApp}}, false)
+
+    - task: GithubRelease@0
+      inputs:
+        gitHubConnection: olilarkin
+        repositoryName: 'iPlug2/iPlug2.github.io'
+        action: 'edit' 
+        target: 'master'
+        tag: 'latest'
+        title: 'iPlug 2 Examples'
+        releaseNotes: ${{parameters.releaseNotes}}
+        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}.zip'
+        assetUploadMode: 'replace'
+        isDraft: true
+        isPreRelease: true
+        addChangeLog: false
+      condition: eq(${{parameters.justApp}}, false)
+
+    - task: DownloadPipelineArtifact@0
+      inputs:
+        artifactName: '${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}'
+        targetPath: '$(Build.BinariesDirectory)/VST3'
+      condition: eq(${{parameters.justApp}}, false)
+
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)/VST3'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}.zip' 
+        includeRootFolder: false
+      condition: eq(${{parameters.justApp}}, false)
+
+    - task: GithubRelease@0
+      inputs:
+        gitHubConnection: olilarkin
+        repositoryName: 'iPlug2/iPlug2.github.io'
+        action: 'edit' 
+        target: 'master'
+        tag: 'latest'
+        title: 'iPlug 2 Examples'
+        releaseNotes: ${{parameters.releaseNotes}}
+        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_VST3_${{parameters.name}}_${{parameters.graphics}}.zip'
+        assetUploadMode: 'replace'
+        isDraft: true
+        isPreRelease: true
+        addChangeLog: false
+      condition: eq(${{parameters.justApp}}, false)
+
+    - task: DownloadPipelineArtifact@0
+      inputs:
+        artifactName: '${{parameters.platformStr}}_AAX_${{parameters.name}}_${{parameters.graphics}}'
+        targetPath: '$(Build.BinariesDirectory)/AAX'
+      condition: eq(${{parameters.justApp}}, false)
+
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)/AAX'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AAX_${{parameters.name}}_${{parameters.graphics}}.zip' 
+        includeRootFolder: false
+      condition: eq(${{parameters.justApp}}, false)
+
+    - task: GithubRelease@0
+      inputs:
+        gitHubConnection: olilarkin
+        repositoryName: 'iPlug2/iPlug2.github.io'
+        action: 'edit' 
+        target: 'master'
+        tag: 'latest'
+        title: 'iPlug 2 Examples'
+        releaseNotes: ${{parameters.releaseNotes}}
+        assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AAX_${{parameters.name}}_${{parameters.graphics}}.zip'
+        assetUploadMode: 'replace'
+        isDraft: true
+        isPreRelease: true
+        addChangeLog: false
+      condition: eq(${{parameters.justApp}}, false)
+
   - ${{ if eq(parameters.platformStr, 'MAC') }}:
     - task: DownloadPipelineArtifact@0
       inputs:
         artifactName: '${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}'
         targetPath: '$(Build.BinariesDirectory)/AUv2'
+      condition: eq(${{parameters.justApp}}, false)
 
     - task: ArchiveFiles@2
       inputs:
         rootFolderOrFile: '$(Build.BinariesDirectory)/AUv2'
         archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_AUv2_${{parameters.name}}_${{parameters.graphics}}.zip' 
         includeRootFolder: false
+      condition: eq(${{parameters.justApp}}, false)
 
     - task: GithubRelease@0
       inputs:
@@ -159,3 +171,4 @@
         isDraft: true
         isPreRelease: true
         addChangeLog: false
+      condition: eq(${{parameters.justApp}}, false)

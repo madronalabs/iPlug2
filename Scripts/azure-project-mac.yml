@@ -6,6 +6,7 @@ parameters:
   artifactName: ''
   srcRepo: 'none'
   srcBranch: 'master'
+  justApp: false
 
 steps:
   - bash: |

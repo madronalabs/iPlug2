@@ -83,3 +83,4 @@ steps:
       target: ${{parameters.target}}
       artifactName: IGraphicsTest_${{parameters.graphics}}
       platformStr: ${{parameters.platformStr}}
+      justApp: true
