@@ -449,18 +449,16 @@ jobs:
       gitHubConnection: olilarkin
       repositoryName: 'iPlug2/iPlug2.github.io'
       action: 'edit' 
-      target: 'f1b9f1c' # Required when action == create || action == edit
-      tagSource: 'auto' # Required when action == create. Options: auto, manual
-      tag: 'latest' # Required when action == edit || action == discard || tagSource == manual
-      #title: # Optional
-      #releaseNotesSource: 'file' # Optional. Options: file, input
-      #releaseNotesFile: # Optional
-      #releaseNotes: # Optional
-      assets: '$(build.artifactStagingDirectory)/*' # Optional
-      assetUploadMode: 'replace' # Optional. Options: delete, replace
-      #isDraft: false # Optional
-      #isPreRelease: false # Optional
-      #addChangeLog: true # Optional
+      target: 'f1b9f1c'
+      tagSource: 'auto' 
+      tag: 'latest'
+      title: 'iPlug 2 Examples'
+      releaseNotes: 'Here you can download binaries of the iPlug 2 examples and tests, built by continuous integration.\n\nNo binaries are code-signed, so they may not work in hosts that require a valid signature.'
+      assets: '$(build.artifactStagingDirectory)/*'
+      assetUploadMode: 'replace'
+      isDraft: true
+      isPreRelease: true
+      addChangeLog: false
 
 # - job: BUILD_MAC_TOOLS
 #   condition: and(eq(variables.buildTools, false), eq(variables.buildMac, true))
