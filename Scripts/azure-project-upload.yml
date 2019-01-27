@@ -33,7 +33,7 @@
 
   - ${{ if or(eq(parameters.platformStr, 'MAC'), eq(parameters.platformStr, 'WIN')) }}:
     - bash: |
-        rm -r $(BUILD_BINARIESDIRECTORY)
+        rm -r $BUILD_BINARIESDIRECTORY
       displayName: empty binaries directory
 
     - task: DownloadPipelineArtifact@0
