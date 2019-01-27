@@ -62,7 +62,7 @@ steps:
       graphics: ${{parameters.graphics}}
       target: ${{parameters.target}}
       artifactName: IPlugFaustDSP_${{parameters.graphics}}
-    platformStr: ${{parameters.platformStr}}
+      platformStr: ${{parameters.platformStr}}
 
   # IGraphicsStressTest
   - template: ${{parameters.platform}}

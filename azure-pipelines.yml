@@ -375,9 +375,9 @@ jobs:
       NANOVG:
         graphics: 'NANOVG'
         condition: eq(variables.buildNANOVG, true)
-      # CANVAS:
-      #   graphics: 'CANVAS'
-      #   condition: eq(variables.buildCANVAS, true)
+      CANVAS:
+        graphics: 'CANVAS'
+        condition: eq(variables.buildCANVAS, true)
 
   pool:
     vmImage: 'ubuntu-16.04'
@@ -419,7 +419,10 @@ jobs:
       # AGG:
       #   graphics: 'AGG'
       #   condition: eq(variables.buildAGG, true)
-
+      CANVAS:  
+        graphics: 'CANVAS'
+        condition: eq(variables.buildCANVAS, true)
+        
   pool:
     vmImage: 'macos-10.13' # maintain macOS permissions
 

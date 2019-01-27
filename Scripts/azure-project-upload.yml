@@ -24,7 +24,7 @@
         git push origin master
       displayName: Publish ${{parameters.platformStr}}_${{parameters.name}}_${{parameters.graphics}} to github pages
 
-  - ${{ if or(eq(parameters.platformStr, 'MAC'), eq(parameters.platformStr, 'WIN')) }}:
+  - ${{ if and(or(eq(parameters.platformStr, 'MAC'), eq(parameters.platformStr, 'WIN')), ne(parameters.graphics, 'CANVAS')) }}:
     - bash: |
         rm -r $BUILD_BINARIESDIRECTORY
       displayName: Empty binaries directory
