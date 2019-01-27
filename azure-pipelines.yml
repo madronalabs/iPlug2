@@ -304,15 +304,15 @@ jobs:
       NANOVG:
         graphics: 'NANOVG'
         condition: eq(variables.buildNANOVG, true)
-      CAIRO:
-        graphics: 'CAIRO'
-        condition: eq(variables.buildCAIRO, true)
-      LICE:
-        graphics: 'LICE'
-        condition: eq(variables.buildLICE, true)
-      AGG:
-        graphics: 'AGG'
-        condition: eq(variables.buildAGG, true)
+      # CAIRO:
+      #   graphics: 'CAIRO'
+      #   condition: eq(variables.buildCAIRO, true)
+      # LICE:
+      #   graphics: 'LICE'
+      #   condition: eq(variables.buildLICE, true)
+      # AGG:
+      #   graphics: 'AGG'
+      #   condition: eq(variables.buildAGG, true)
 
   pool:
     vmImage: 'macos-10.13'
@@ -338,15 +338,15 @@ jobs:
       NANOVG:
         graphics: 'NANOVG'
         condition: eq(variables.buildNANOVG, true)
-      CAIRO:
-        graphics: 'CAIRO'
-        condition: eq(variables.buildCAIRO, true)
-      LICE:
-        graphics: 'LICE'
-        condition: eq(variables.buildLICE, true)
-      AGG:
-        graphics: 'AGG'
-        condition: eq(variables.buildAGG, true)
+      # CAIRO:
+      #   graphics: 'CAIRO'
+      #   condition: eq(variables.buildCAIRO, true)
+      # LICE:
+      #   graphics: 'LICE'
+      #   condition: eq(variables.buildLICE, true)
+      # AGG:
+      #   graphics: 'AGG'
+      #   condition: eq(variables.buildAGG, true)
 
   pool:
     vmImage: 'vs2017-win2016'
@@ -411,15 +411,15 @@ jobs:
       NANOVG:
         graphics: 'NANOVG'
         condition: eq(variables.buildNANOVG, true)
-      CAIRO:
-        graphics: 'CAIRO'
-        condition: eq(variables.buildCAIRO, true)
-      LICE:
-        graphics: 'LICE'
-        condition: eq(variables.buildLICE, true)
-      AGG:
-        graphics: 'AGG'
-        condition: eq(variables.buildAGG, true)
+      # CAIRO:
+      #   graphics: 'CAIRO'
+      #   condition: eq(variables.buildCAIRO, true)
+      # LICE:
+      #   graphics: 'LICE'
+      #   condition: eq(variables.buildLICE, true)
+      # AGG:
+      #   graphics: 'AGG'
+      #   condition: eq(variables.buildAGG, true)
 
   pool:
     vmImage: 'ubuntu-16.04'
