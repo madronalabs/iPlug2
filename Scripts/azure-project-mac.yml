@@ -104,13 +104,13 @@ steps:
     displayName: Publish ${{ parameters.name }} AAX
 
   - task: PublishPipelineArtifact@0
-  inputs:
-    artifactName: 'MAC_AUv2_${{ parameters.artifactName }}'
-    targetPath: '$(Build.ArtifactsStagingDirectory)/AUv2/${{ parameters.name }}'
-  displayName: Publish ${{ parameters.name }} AUv2
+    inputs:
+      artifactName: 'MAC_AUv2_${{ parameters.artifactName }}'
+      targetPath: '$(Build.ArtifactsStagingDirectory)/AUv2/${{ parameters.name }}'
+    displayName: Publish ${{ parameters.name }} AUv2
 
   - task: PublishPipelineArtifact@0
-  inputs:
-    artifactName: 'MAC_APP_${{ parameters.artifactName }}'
-    targetPath: '$(Build.ArtifactsStagingDirectory)/APP/${{ parameters.name }}'
-  displayName: Publish ${{ parameters.name }} APP
+    inputs:
+      artifactName: 'MAC_APP_${{ parameters.artifactName }}'
+      targetPath: '$(Build.ArtifactsStagingDirectory)/APP/${{ parameters.name }}'
+    displayName: Publish ${{ parameters.name }} APP
