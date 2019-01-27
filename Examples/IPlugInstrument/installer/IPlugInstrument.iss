@@ -47,28 +47,28 @@ Name: "{cf32}\VST3\IPlugInstrument.vst3\"; Attribs: readonly; Components:vst3_32
 Name: "{cf64}\VST3\IPlugInstrument.vst3\"; Attribs: readonly; Check: Is64BitInstallMode; Components:vst3_64; 
 
 [Files]
-Source: "..\build-win\app\Win32\bin\IPlugInstrument.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Components:app; Flags: ignoreversion;
-Source: "..\build-win\app\x64\bin\IPlugInstrument.exe"; DestDir: "{app}"; Check: Is64BitInstallMode; Components:app; Flags: ignoreversion;
+Source: "..\build-win\IPlugInstrument_Win32.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Components:app; Flags: ignoreversion;
+Source: "..\build-win\IPlugInstrument_x64.exe"; DestDir: "{app}"; Check: Is64BitInstallMode; Components:app; Flags: ignoreversion;
 
-Source: "..\build-win\vst2\Win32\bin\IPlugInstrument.dll"; DestDir: {code:GetVST2Dir_32}; Check: not Is64BitInstallMode; Components:vst2_32; Flags: ignoreversion;
-Source: "..\build-win\vst2\Win32\bin\IPlugInstrument.dll"; DestDir: {code:GetVST2Dir_32}; Check: Is64BitInstallMode; Components:vst2_32; Flags: ignoreversion;
-Source: "..\build-win\vst2\x64\bin\IPlugInstrument.dll"; DestDir: {code:GetVST2Dir_64}; Check: Is64BitInstallMode; Components:vst2_64; Flags: ignoreversion;
+Source: "..\build-win\IPlugInstrument_Win32.dll"; DestDir: {code:GetVST2Dir_32}; Check: not Is64BitInstallMode; Components:vst2_32; Flags: ignoreversion;
+Source: "..\build-win\IPlugInstrument_Win32.dll"; DestDir: {code:GetVST2Dir_32}; Check: Is64BitInstallMode; Components:vst2_32; Flags: ignoreversion;
+Source: "..\build-win\IPlugInstrument_x64.dll"; DestDir: {code:GetVST2Dir_64}; Check: Is64BitInstallMode; Components:vst2_64; Flags: ignoreversion;
 
-Source: "..\build-win\vst3\bin\IPlugInstrument.vst3\*.*"; Excludes: "\Contents\x86_64\*,*.pdb,*.exp,*.lib,*.ilk,*.ico,*.ini"; DestDir: "{cf32}\VST3\IPlugInstrument.vst3\"; Components:vst3_32; Flags: ignoreversion recursesubdirs;
-Source: "..\build-win\vst3\bin\IPlugInstrument.vst3\Desktop.ini"; DestDir: "{cf32}\VST3\IPlugInstrument.vst3\"; Components:vst3_32; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
-Source: "..\build-win\vst3\bin\IPlugInstrument.vst3\PlugIn.ico"; DestDir: "{cf32}\VST3\IPlugInstrument.vst3\"; Components:vst3_32; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
+Source: "..\build-win\IPlugInstrument.vst3\*.*"; Excludes: "\Contents\x86_64\*,*.pdb,*.exp,*.lib,*.ilk,*.ico,*.ini"; DestDir: "{cf32}\VST3\IPlugInstrument.vst3\"; Components:vst3_32; Flags: ignoreversion recursesubdirs;
+Source: "..\build-win\IPlugInstrument.vst3\Desktop.ini"; DestDir: "{cf32}\VST3\IPlugInstrument.vst3\"; Components:vst3_32; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
+Source: "..\build-win\IPlugInstrument.vst3\PlugIn.ico"; DestDir: "{cf32}\VST3\IPlugInstrument.vst3\"; Components:vst3_32; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
 
-Source: "..\build-win\vst3\bin\IPlugInstrument.vst3\*.*"; Excludes: "\Contents\x86\*,*.pdb,*.exp,*.lib,*.ilk,*.ico,*.ini"; DestDir: "{cf64}\VST3\IPlugInstrument.vst3\"; Check: Is64BitInstallMode; Components:vst3_64; Flags: ignoreversion recursesubdirs;
-Source: "..\build-win\vst3\bin\IPlugInstrument.vst3\Desktop.ini"; DestDir: "{cf64}\VST3\IPlugInstrument.vst3\"; Check: Is64BitInstallMode; Components:vst3_64; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
-Source: "..\build-win\vst3\bin\IPlugInstrument.vst3\PlugIn.ico"; DestDir: "{cf64}\VST3\IPlugInstrument.vst3\"; Check: Is64BitInstallMode; Components:vst3_64; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
+Source: "..\build-win\IPlugInstrument.vst3\*.*"; Excludes: "\Contents\x86\*,*.pdb,*.exp,*.lib,*.ilk,*.ico,*.ini"; DestDir: "{cf64}\VST3\IPlugInstrument.vst3\"; Check: Is64BitInstallMode; Components:vst3_64; Flags: ignoreversion recursesubdirs;
+Source: "..\build-win\IPlugInstrument.vst3\Desktop.ini"; DestDir: "{cf64}\VST3\IPlugInstrument.vst3\"; Check: Is64BitInstallMode; Components:vst3_64; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
+Source: "..\build-win\IPlugInstrument.vst3\PlugIn.ico"; DestDir: "{cf64}\VST3\IPlugInstrument.vst3\"; Check: Is64BitInstallMode; Components:vst3_64; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
 
 ; Source: "..\build-win\aax\bin\IPlugInstrument.aaxplugin\*.*"; Excludes: "\Contents\x64\*,*.pdb,*.exp,*.lib,*.ilk,*.ico,*.ini"; DestDir: "{cf32}\Avid\Audio\Plug-Ins\IPlugInstrument.aaxplugin\"; Components:aax_32; Flags: ignoreversion recursesubdirs;
 ; Source: "..\build-win\aax\bin\IPlugInstrument.aaxplugin\Desktop.ini"; DestDir: "{cf32}\Avid\Audio\Plug-Ins\IPlugInstrument.aaxplugin\"; Components:aax_32; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
 ; Source: "..\build-win\aax\bin\IPlugInstrument.aaxplugin\PlugIn.ico"; DestDir: "{cf32}\Avid\Audio\Plug-Ins\IPlugInstrument.aaxplugin\"; Components:aax_32; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
 
-Source: "..\build-win\aax\bin\IPlugInstrument.aaxplugin\*.*"; Excludes: "\Contents\Win32\*,*.pdb,*.exp,*.lib,*.ilk,*.ico,*.ini"; DestDir: "{cf64}\Avid\Audio\Plug-Ins\IPlugInstrument.aaxplugin\"; Check: Is64BitInstallMode; Components:aax_64; Flags: ignoreversion recursesubdirs;
-Source: "..\build-win\aax\bin\IPlugInstrument.aaxplugin\Desktop.ini"; DestDir: "{cf64}\Avid\Audio\Plug-Ins\IPlugInstrument.aaxplugin\"; Check: Is64BitInstallMode; Components:aax_64; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
-Source: "..\build-win\aax\bin\IPlugInstrument.aaxplugin\PlugIn.ico"; DestDir: "{cf64}\Avid\Audio\Plug-Ins\IPlugInstrument.aaxplugin\"; Check: Is64BitInstallMode; Components:aax_64; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
+Source: "..\build-win\IPlugInstrument.aaxplugin\*.*"; Excludes: "\Contents\Win32\*,*.pdb,*.exp,*.lib,*.ilk,*.ico,*.ini"; DestDir: "{cf64}\Avid\Audio\Plug-Ins\IPlugInstrument.aaxplugin\"; Check: Is64BitInstallMode; Components:aax_64; Flags: ignoreversion recursesubdirs;
+Source: "..\build-win\IPlugInstrument.aaxplugin\Desktop.ini"; DestDir: "{cf64}\Avid\Audio\Plug-Ins\IPlugInstrument.aaxplugin\"; Check: Is64BitInstallMode; Components:aax_64; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
+Source: "..\build-win\IPlugInstrument.aaxplugin\PlugIn.ico"; DestDir: "{cf64}\Avid\Audio\Plug-Ins\IPlugInstrument.aaxplugin\"; Check: Is64BitInstallMode; Components:aax_64; Flags: overwritereadonly ignoreversion; Attribs: hidden system;
 
 Source: "..\manual\IPlugInstrument manual.pdf"; DestDir: "{app}"
 Source: "changelog.txt"; DestDir: "{app}"
