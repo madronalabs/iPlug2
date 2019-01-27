@@ -61,10 +61,10 @@ steps:
       xcodeVersion: '9'
     displayName: Build Xcode project
 
-  - bash: |
-      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-mac/*.build
-      rm -r ${{ parameters.path }}/${{ parameters.name }}/build-mac/PCH
-    displayName: Delete unwanted files
+  # - bash: |
+  #     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-mac/*.build
+  #     rm -r ${{ parameters.path }}/${{ parameters.name }}/build-mac/PCH
+  #   displayName: Delete unwanted files
 
   # - bash: |
   #     mkdir -p ${{ parameters.path }}/${{ parameters.name }}/build-mac/
@@ -72,8 +72,45 @@ steps:
 
   #   displayName: TEST PAYLOAD
 
+  - bash: |
+    mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
+    mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
+    mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
+    mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
+    mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/AUv2/${{ parameters.name }}
+    mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
+    mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst2* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
+    mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.aaxplugin* $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
+    mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.app* $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
+    mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.component* $BUILD_ARTIFACTSTAGINGDIRECTORY/AUv2/${{ parameters.name }}
+  displayName: Organize artifacts
+
   - task: PublishPipelineArtifact@0
     inputs:
-      artifactName: 'MAC_${{ parameters.artifactName }}'
-      targetPath: '${{ parameters.path }}/${{ parameters.name }}/build-mac'
-    displayName: Publish ${{ parameters.name }}
+      artifactName: 'MAC_VST2_${{ parameters.artifactName }}'
+      targetPath: '$(Build.ArtifactsStagingDirectory)/VST2/${{ parameters.name }}'
+    displayName: Publish ${{ parameters.name }} VST2
+
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: 'MAC_VST3_${{ parameters.artifactName }}'
+      targetPath: '$(Build.ArtifactsStagingDirectory)/VST3/${{ parameters.name }}'
+    displayName: Publish ${{ parameters.name }} VST3
+
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: 'MAC_AAX_${{ parameters.artifactName }}'
+      targetPath: '$(Build.ArtifactsStagingDirectory)/AAX/${{ parameters.name }}'
+    displayName: Publish ${{ parameters.name }} AAX
+
+  - task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'MAC_AUv2_${{ parameters.artifactName }}'
+    targetPath: '$(Build.ArtifactsStagingDirectory)/AUv2/${{ parameters.name }}'
+  displayName: Publish ${{ parameters.name }} AUv2
+
+  - task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'MAC_APP_${{ parameters.artifactName }}'
+    targetPath: '$(Build.ArtifactsStagingDirectory)/APP/${{ parameters.name }}'
+  displayName: Publish ${{ parameters.name }} APP

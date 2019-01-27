@@ -1,9 +1,9 @@
 variables:
   buildDEPS: false
   downloadDEPS: true
-  buildWeb: true
+  buildWeb: false
   buildMac: true
-  buildWin: true
+  buildWin: false
   # buildNANOVG: true;
   # buildLICE: false;
   # buildCAIRO: false;
@@ -407,58 +407,50 @@ jobs:
       graphics: $(graphics)
 
 
-- job: PUBLISH_IPLUG2_WEBSITE
-  dependsOn: 
-    - BUILD_WEB_PROJECTS
-    - BUILD_WIN_PROJECTS
-    - BUILD_MAC_PROJECTS
+# - job: PUBLISH_IPLUG2_WEBSITE
+#   dependsOn: 
+#     - BUILD_WEB_PROJECTS
+#     - BUILD_WIN_PROJECTS
+#     - BUILD_MAC_PROJECTS
   
-  pool:
-    vmImage: 'ubuntu-16.04'
-  steps:
-  - checkout: none
+#   pool:
+#     vmImage: 'ubuntu-16.04'
+#   steps:
+#   - checkout: none
 
-  - bash: |
-      git clone https://olilarkin:$GITHUB_PAT@github.com/iPlug2/iPlug2.github.io.git $BUILD_SOURCESDIRECTORY
-    displayName: Clone website repo
-    env:
-      GITHUB_PAT: $(GITHUB_PAT)
+#   - bash: |
+#       git clone https://olilarkin:$GITHUB_PAT@github.com/iPlug2/iPlug2.github.io.git $BUILD_SOURCESDIRECTORY
+#     displayName: Clone website repo
+#     env:
+#       GITHUB_PAT: $(GITHUB_PAT)
 
-  - template: Scripts/azure-project_list.yml
-    parameters:
-      platform: azure-project-upload.yml
+#   - template: Scripts/azure-project_list.yml
+#     parameters:
+#       platform: azure-project-upload.yml
 
-  - bash: |
-      git config user.email olilarkin@googlemail.com
-      git config user.name olilarkin
-      git add *
-      git commit -m "publish via pipeline"
-      git push origin master
-    displayName: Publish to github pages
+#   - bash: |
+#       git config user.email olilarkin@googlemail.com
+#       git config user.name olilarkin
+#       git add *
+#       git commit -m "publish via pipeline"
+#       git push origin master
+#     displayName: Publish to github pages
 
-  - bash: |
-      cd $BUILD_ARTIFACTSTAGINGDIRECTORY
-      mkdir dSYMs
-      mv *.dSYM dSYMs
-      rm -r pdbs
-      rm -r dSYMs
-    displayName: Organize formats
-
-  - task: GithubRelease@0
-    inputs:
-      gitHubConnection: olilarkin
-      repositoryName: 'iPlug2/iPlug2.github.io'
-      action: 'edit' 
-      target: 'master'
-      # tagSource: 'auto' 
-      tag: 'latest'
-      title: 'iPlug 2 Examples'
-      releaseNotes: 'Here you can download binaries of the iPlug 2 examples and tests, built by continuous integration.\n\nNo binaries are code-signed, so they may not work in hosts that require a valid signature.'
-      assets: '$(build.artifactStagingDirectory)/*'
-      assetUploadMode: 'replace'
-      isDraft: true
-      isPreRelease: true
-      addChangeLog: false
+#   - task: GithubRelease@0
+#     inputs:
+#       gitHubConnection: olilarkin
+#       repositoryName: 'iPlug2/iPlug2.github.io'
+#       action: 'edit' 
+#       target: 'master'
+#       # tagSource: 'auto' 
+#       tag: 'latest'
+#       title: 'iPlug 2 Examples'
+#       releaseNotes: 'Here you can download binaries of the iPlug 2 examples and tests, built by continuous integration.\n\nNo binaries are code-signed, so they may not work in hosts that require a valid signature.'
+#       assets: '$(build.artifactStagingDirectory)/*'
+#       assetUploadMode: 'replace'
+#       isDraft: true
+#       isPreRelease: true
+#       addChangeLog: false
 
 # - job: BUILD_MAC_TOOLS
 #   condition: and(eq(variables.buildTools, false), eq(variables.buildMac, true))
