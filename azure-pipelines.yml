@@ -422,7 +422,8 @@ jobs:
       #   condition: eq(variables.buildAGG, true)
 
   pool:
-    vmImage: 'ubuntu-16.04'
+    vmImage: 'macos-10.13' # maintain macOS permissions
+    
   steps:
   - checkout: none
 
