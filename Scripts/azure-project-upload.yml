@@ -9,8 +9,8 @@
     - task: DownloadPipelineArtifact@0
       inputs:
         artifactName: 'WEB_${{parameters.name}}_${{parameters.graphics}}'
-        targetPath: 'webgl/${{parameters.name}}'
-        
+        targetPath: '${{parameters.graphics}}/${{parameters.name}}'
+
     - bash: |
         sed -i.bak 's,var origin = "/";,var origin = "https://iplug2.github.io/${{parameters.graphics}}/${{parameters.name}}/";,g' ./${{parameters.graphics}}/${{parameters.name}}/scripts/${{parameters.name}}-awn.js
         rm  ./${{parameters.graphics}}/${{parameters.name}}/scripts/*.bak
