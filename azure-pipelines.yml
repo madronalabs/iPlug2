@@ -444,12 +444,12 @@ jobs:
       graphics: $(graphics)
       platformStr: 'WIN'
 
-  - template: Scripts/azure-project_list.yml
-    parameters:
-      platform: azure-project-upload.yml
-      graphics: $(graphics)
-      platformStr: 'WEB'
-    condition: or(eq($(graphics), 'NANOVG'), eq($(graphics), 'CANVAS'))
+  - if eq($(graphics), 'NANOVG'), eq($(graphics), 'CANVAS'):
+    - template: Scripts/azure-project_list.yml
+      parameters:
+        platform: azure-project-upload.yml
+        graphics: $(graphics)
+        platformStr: 'WEB'
 
   - bash: |
       git config user.email olilarkin@googlemail.com
