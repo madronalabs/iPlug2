@@ -446,7 +446,7 @@ jobs:
 
   - task: GithubRelease@0
     inputs:
-      gitHubConnection: iPlug2
+      gitHubConnection: olilarkin
       repositoryName: 'iPlug2/iPlug2.github.io'
       action: 'edit' 
       target: 'f1b9f1c' # Required when action == create || action == edit
