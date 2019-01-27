@@ -78,7 +78,7 @@ steps:
       mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.app* $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
 
       #if we are building a project with plug-ins
-      if [ -d ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst3 ] #todo: check something else
+      if [ -d ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst3 ] #todo: check something else ${{parameters.justApp}}
       then
         mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
         mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
@@ -96,24 +96,28 @@ steps:
       artifactName: 'MAC_VST2_${{ parameters.artifactName }}'
       targetPath: '$(Build.ArtifactStagingDirectory)/VST2/${{ parameters.name }}'
     displayName: Publish ${{ parameters.name }} VST2
+    condition: eq(${{parameters.justApp}}, false)
 
   - task: PublishPipelineArtifact@0
     inputs:
       artifactName: 'MAC_VST3_${{ parameters.artifactName }}'
       targetPath: '$(Build.ArtifactStagingDirectory)/VST3/${{ parameters.name }}'
     displayName: Publish ${{ parameters.name }} VST3
+    condition: eq(${{parameters.justApp}}, false)
 
   - task: PublishPipelineArtifact@0
     inputs:
       artifactName: 'MAC_AAX_${{ parameters.artifactName }}'
       targetPath: '$(Build.ArtifactStagingDirectory)/AAX/${{ parameters.name }}'
     displayName: Publish ${{ parameters.name }} AAX
+    condition: eq(${{parameters.justApp}}, false)
 
   - task: PublishPipelineArtifact@0
     inputs:
       artifactName: 'MAC_AUv2_${{ parameters.artifactName }}'
       targetPath: '$(Build.ArtifactStagingDirectory)/AUv2/${{ parameters.name }}'
     displayName: Publish ${{ parameters.name }} AUv2
+    condition: eq(${{parameters.justApp}}, false)
 
   - task: PublishPipelineArtifact@0
     inputs:
