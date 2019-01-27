@@ -402,7 +402,7 @@ jobs:
 
 - job: PUBLISH_IPLUG2_WEBSITE
   dependsOn: 
-    # - BUILD_WEB_PROJECTS
+    - BUILD_WEB_PROJECTS
     - BUILD_WIN_PROJECTS
     - BUILD_MAC_PROJECTS
     
