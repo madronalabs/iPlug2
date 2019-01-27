@@ -73,6 +73,7 @@ steps:
       target: ${{parameters.target}}
       artifactName: IGraphicsStressTest_${{parameters.graphics}}
       platformStr: ${{parameters.platformStr}}
+      justApp: true
 
   #IGraphicsTest
   - template: ${{parameters.platform}}

@@ -11,11 +11,21 @@
       targetPath: '$(Build.BinariesDirectory)/${{parameters.pluginType}}'
     displayName: Download ${{parameters.platformStr}}_${{parameters.pluginType}}_${{parameters.name}}_${{parameters.graphics}}
 
-  - task: ArchiveFiles@2
-    inputs:
-      rootFolderOrFile: '$(Build.BinariesDirectory)/${{parameters.pluginType}}'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_${{parameters.pluginType}}_${{parameters.name}}_${{parameters.graphics}}.zip' 
-    displayName: Archive ${{parameters.platformStr}}_${{parameters.pluginType}}_${{parameters.name}}_${{parameters.graphics}}
+  - ${{ if eq(parameters.platformStr, 'MAC') }}:      
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)/${{parameters.pluginType}}'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_${{parameters.pluginType}}_${{parameters.name}}_${{parameters.graphics}}.tar.gz'
+        archiveType: 'tar'
+        tarCompression: 'gz' 
+      displayName: Archive ${{parameters.platformStr}}_${{parameters.pluginType}}_${{parameters.name}}_${{parameters.graphics}}
+
+  - ${{ if eq(parameters.platformStr, 'WIN') }}:      
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)/${{parameters.pluginType}}'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_${{parameters.pluginType}}_${{parameters.name}}_${{parameters.graphics}}.zip' 
+      displayName: Archive ${{parameters.platformStr}}_${{parameters.pluginType}}_${{parameters.name}}_${{parameters.graphics}}
 
   - task: GithubRelease@0
     inputs:
