@@ -444,7 +444,7 @@ jobs:
       graphics: $(graphics)
       platformStr: 'WIN'
 
-  - if eq($(graphics), 'NANOVG'), eq($(graphics), 'CANVAS'):
+  - if or(eq($(graphics), 'NANOVG'), eq($(graphics), 'CANVAS')):
     - template: Scripts/azure-project_list.yml
       parameters:
         platform: azure-project-upload.yml
