@@ -78,8 +78,8 @@ steps:
       mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
       mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
       mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/AUv2/${{ parameters.name }}
+      mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst3* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }} # must move VST3 first
       mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
-      mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst3* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
       mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.aaxplugin* $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
       mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.app* $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
       mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.component* $BUILD_ARTIFACTSTAGINGDIRECTORY/AUv2/${{ parameters.name }}

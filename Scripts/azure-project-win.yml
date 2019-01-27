@@ -60,35 +60,40 @@ steps:
   #   displayName: Compile ${{ parameters.name }} Visual Studio Solution Win32
 
   - bash: |
-      if [ -d ./${{ parameters.path }}/${{ parameters.name }}/build-win/vst2 ]
-      then
-        rm -r ./${{ parameters.path }}/${{ parameters.name }}/build-win/vst2
-      fi
-
-      if [ -d ./${{ parameters.path }}/${{ parameters.name }}/build-win/vst3 ]
-      then
-        rm -r ./${{ parameters.path }}/${{ parameters.name }}/build-win/vst3
-      fi
-
-      if [ -d ./${{ parameters.path }}/${{ parameters.name }}/build-win/aax ]
-      then
-        rm -r ./${{ parameters.path }}/${{ parameters.name }}/build-win/aax
-      fi
-
-      if [ -d ./${{ parameters.path }}/${{ parameters.name }}/build-win/app ]
-      then
-        rm -r ./${{ parameters.path }}/${{ parameters.name }}/build-win/app
-      fi
-    displayName: Delete unwanted files
-
-  # - bash: |
-  #     mkdir -p ${{ parameters.path }}/${{ parameters.name }}/build-win/
-  #     echo "hello ${{ parameters.graphics }}" > ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.graphics }}.txt
-
-  #   displayName: TEST PAYLOAD
+      mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
+      mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
+      mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
+      mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
+      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}.vst3* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }} # must move VST3 first
+      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-vst3_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
+      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}_x64.dll $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
+      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-vst2_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
+      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}.aaxplugin* $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
+      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-aax_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
+      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/${{ parameters.name }}_x64.exe $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
+      mv ${{ parameters.path }}/${{ parameters.name }}/build-win/pdbs/${{ parameters.name }}-app_x64.pdb $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }} 
+    displayName: Organize artifacts
 
   - task: PublishPipelineArtifact@0
     inputs:
-      artifactName: 'WIN_${{ parameters.artifactName }}'
-      targetPath: '${{ parameters.path }}/${{ parameters.name }}/build-win'
-    displayName: Publish ${{ parameters.name }}
+      artifactName: 'WIN_VST2_${{ parameters.artifactName }}'
+      targetPath: '$(Build.ArtifactStagingDirectory)/VST2/${{ parameters.name }}'
+    displayName: Publish ${{ parameters.name }} VST2
+
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: 'WIN_VST3_${{ parameters.artifactName }}'
+      targetPath: '$(Build.ArtifactStagingDirectory)/VST3/${{ parameters.name }}'
+    displayName: Publish ${{ parameters.name }} VST3
+
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: 'WIN_AAX_${{ parameters.artifactName }}'
+      targetPath: '$(Build.ArtifactStagingDirectory)/AAX/${{ parameters.name }}'
+    displayName: Publish ${{ parameters.name }} AAX
+
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: 'WIN_APP_${{ parameters.artifactName }}'
+      targetPath: '$(Build.ArtifactStagingDirectory)/APP/${{ parameters.name }}'
+    displayName: Publish ${{ parameters.name }} APP
