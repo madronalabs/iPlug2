@@ -2,8 +2,8 @@ variables:
   buildDEPS: false
   downloadDEPS: true
   buildWeb: true
-  buildMac: false
-  buildWin: false
+  buildMac: true
+  buildWin: true
   # buildNANOVG: true;
   # buildLICE: false;
   # buildCAIRO: false;
@@ -408,7 +408,11 @@ jobs:
 
 
 - job: PUBLISH_IPLUG2_WEBSITE
-  dependsOn: BUILD_WEB_PROJECTS
+  dependsOn: |
+    BUILD_WEB_PROJECTS
+    BUILD_WIN_PROJECTS
+    BUILD_MAC_PROJECTS
+
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
@@ -420,21 +424,9 @@ jobs:
     env:
       GITHUB_PAT: $(GITHUB_PAT)
 
-  - task: DownloadPipelineArtifact@0
-    inputs:
-      artifactName: 'WEB_IPlugEffect_NANOVG'
-      targetPath: 'webgl/IPlugEffect'
-
-  - task: DownloadPipelineArtifact@0
-    inputs:
-      artifactName: 'WEB_IPlugEffect_CANVAS'
-      targetPath: 'canvas/IPlugEffect'
-
-  - bash: |
-      sed -i.bak 's,var origin = "/";,var origin = "https://iplug2.github.io/webgl/IPlugEffect/";,g' ./webgl/IPlugEffect/scripts/IPlugEffect-awn.js
-      sed -i.bak 's,var origin = "/";,var origin = "https://iplug2.github.io/canvas/IPlugEffect/";,g' ./canvas/IPlugEffect/scripts/IPlugEffect-awn.js
-      rm  ./webgl/IPlugEffect/scripts/*.bak
-      rm  ./canvas/IPlugEffect/scripts/*.bak
+  - template: Scripts/azure-project_list.yml
+    parameters:
+      platform: azure-project-upload.yml
 
   - bash: |
       git config user.email olilarkin@googlemail.com
