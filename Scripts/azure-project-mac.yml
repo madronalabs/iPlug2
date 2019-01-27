@@ -79,7 +79,7 @@ steps:
       mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
       mkdir -p $BUILD_ARTIFACTSTAGINGDIRECTORY/AUv2/${{ parameters.name }}
       mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST2/${{ parameters.name }}
-      mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst2* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
+      mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.vst3* $BUILD_ARTIFACTSTAGINGDIRECTORY/VST3/${{ parameters.name }}
       mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.aaxplugin* $BUILD_ARTIFACTSTAGINGDIRECTORY/AAX/${{ parameters.name }}
       mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.app* $BUILD_ARTIFACTSTAGINGDIRECTORY/APP/${{ parameters.name }}
       mv ${{ parameters.path }}/${{ parameters.name }}/build-mac/${{ parameters.name }}.component* $BUILD_ARTIFACTSTAGINGDIRECTORY/AUv2/${{ parameters.name }}
@@ -88,29 +88,29 @@ steps:
   - task: PublishPipelineArtifact@0
     inputs:
       artifactName: 'MAC_VST2_${{ parameters.artifactName }}'
-      targetPath: '$(Build.ArtifactsStagingDirectory)/VST2/${{ parameters.name }}'
+      targetPath: '$(Build.ArtifactStagingDirectory)/VST2/${{ parameters.name }}'
     displayName: Publish ${{ parameters.name }} VST2
 
   - task: PublishPipelineArtifact@0
     inputs:
       artifactName: 'MAC_VST3_${{ parameters.artifactName }}'
-      targetPath: '$(Build.ArtifactsStagingDirectory)/VST3/${{ parameters.name }}'
+      targetPath: '$(Build.ArtifactStagingDirectory)/VST3/${{ parameters.name }}'
     displayName: Publish ${{ parameters.name }} VST3
 
   - task: PublishPipelineArtifact@0
     inputs:
       artifactName: 'MAC_AAX_${{ parameters.artifactName }}'
-      targetPath: '$(Build.ArtifactsStagingDirectory)/AAX/${{ parameters.name }}'
+      targetPath: '$(Build.ArtifactStagingDirectory)/AAX/${{ parameters.name }}'
     displayName: Publish ${{ parameters.name }} AAX
 
   - task: PublishPipelineArtifact@0
     inputs:
       artifactName: 'MAC_AUv2_${{ parameters.artifactName }}'
-      targetPath: '$(Build.ArtifactsStagingDirectory)/AUv2/${{ parameters.name }}'
+      targetPath: '$(Build.ArtifactStagingDirectory)/AUv2/${{ parameters.name }}'
     displayName: Publish ${{ parameters.name }} AUv2
 
   - task: PublishPipelineArtifact@0
     inputs:
       artifactName: 'MAC_APP_${{ parameters.artifactName }}'
-      targetPath: '$(Build.ArtifactsStagingDirectory)/APP/${{ parameters.name }}'
+      targetPath: '$(Build.ArtifactStagingDirectory)/APP/${{ parameters.name }}'
     displayName: Publish ${{ parameters.name }} APP
