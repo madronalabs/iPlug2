@@ -15,6 +15,10 @@
   #     artifactName: 'WEB_${{parameters.name}}_CANVAS'
   #     targetPath: 'canvas/${{parameters.name}}'
 
+  - bash: |
+      rm -r $(BUILD_BINARIESDIRECTORY)
+    displayName: empty binaries directory
+
   - task: DownloadPipelineArtifact@0
     inputs:
       artifactName: '${{parameters.platformStr}}_VST2_${{parameters.name}}_${{parameters.graphics}}'
