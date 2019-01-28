@@ -25,6 +25,7 @@ steps:
     displayName: Publish ${{parameters.platformStr}}_${{parameters.name}}_${{parameters.graphics}} to github pages
     
 - ${{ if or(eq(parameters.platformStr, 'MAC'), eq(parameters.platformStr, 'WIN')) }}:
+- ${{ if ne(parameters.graphics, 'CANVAS') }}:
   - template: azure-project-upload-release.yml
     parameters:
       name: '${{parameters.name}}'

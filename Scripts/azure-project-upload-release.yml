@@ -41,7 +41,7 @@
       tag: 'latest'
       title: 'iPlug 2 Examples'
       releaseNotes: 'Here you can download binaries of the iPlug 2 examples and tests, built by continuous integration.\n\nNo binaries are code-signed, so they may not work in hosts that require a valid signature.'
-      assets: '$(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_${{parameters.pluginType}}_${{parameters.name}}_${{parameters.graphics}}.zip, $(Build.ArtifactStagingDirectory)/${{parameters.platformStr}}_${{parameters.pluginType}}_${{parameters.name}}_${{parameters.graphics}}.tar.gz'
+      assets: '$(Build.ArtifactStagingDirectory)/**.zip, $(Build.ArtifactStagingDirectory)/**.tar.gz'
       assetUploadMode: 'replace'
       isDraft: true
       isPreRelease: true
