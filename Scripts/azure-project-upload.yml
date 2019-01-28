@@ -1,8 +1,8 @@
 parameters:
-name: ''
-platformStr: ''
-graphics: ''
-justApp: false
+  name: ''
+  platformStr: ''
+  graphics: ''
+  justApp: false
 
 steps:
 - ${{ if eq(parameters.platformStr, 'WEB') }}:
@@ -24,7 +24,7 @@ steps:
       git push origin master
     displayName: Publish ${{parameters.platformStr}}_${{parameters.name}}_${{parameters.graphics}} to github pages
     
-- ${{ if and(or(eq(parameters.platformStr, 'MAC'), eq(parameters.platformStr, 'WIN')), not(parameters.graphics, 'CANVAS')) }}:
+# - ${{ if and(or(eq(parameters.platformStr, 'MAC'), eq(parameters.platformStr, 'WIN')), not(parameters.graphics, 'CANVAS')) }}:
   - template: azure-project-upload-release.yml
     parameters:
       name: '${{parameters.name}}'
