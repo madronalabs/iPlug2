@@ -8,16 +8,11 @@ In the future, this will include some tutorials and guides, but for now it's jus
 
 In the meantime, you can read two academic papers that we wrote about the project, which are in the documentation folder, and you can watch the accompanying presentations on youtube:
 
-1 - International Faust Conference (IFC 2018) [PAPER](https://github.com/iPlug2/iPlug2/raw/master/Documentation/Papers/IFC2018.pdf) | [VIDEO](https://youtu.be/SLHGxBYeID4)
-
-2 - Web Audio Conference (WAC2018) [PAPER](https://github.com/iPlug2/iPlug2/raw/master/Documentation/Papers/WAC2018.pdf) | [VIDEO](https://youtu.be/DDrgW4Qyz8Y)
-
-
-Try iPlug 2 examples online here:
-
-* **IGraphicsTest** : [WebGL](https://iplug2.github.io/webgl/IGraphicsTest/) | [HTML5 Canvas](https://iplug2.github.io/canvas/IGraphicsTest/)
-* **IPlugEffect** : [WebGL](https://iplug2.github.io/webgl/IPlugEffect/)
-* **IPlugInstrument (Work in progress)** : [WebGL](https://iplug2.github.io/webgl/IPlugInstrument/) | [HTML5 Canvas](https://iplug2.github.io/canvas/IPlugInstrument/)
+<ul>
+<li>1 - International Faust Conference (IFC 2018) <a href="https://github.com/iPlug2/iPlug2/raw/master/Documentation/Papers/IFC2018.pdf" target="_blank">PAPER</a> | <a href="https://youtu.be/SLHGxBYeID4">TALK</a></li>
+<li>2 - Web Audio Conference (WAC2018) <a href="https://github.com/iPlug2/iPlug2/raw/master/Documentation/Papers/WAC2018.pdf" target="_blank">PAPER</a> | <a href="https://youtu.be/DDrgW4Qyz8Y">TALK</a></li>
+<li>3 - Audio Developers Conference (ADC2018) <a href="https://youtu.be/IRLxMhksUZ0">TALK</a></li>
+</ul>
 
 <!--
 ## Introduction
