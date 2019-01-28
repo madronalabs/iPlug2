@@ -424,7 +424,7 @@ jobs:
         condition: eq(variables.buildCANVAS, true)
         
   pool:
-    vmImage: 'macos-10.13' # maintain macOS permissions
+    vmImage: 'ubuntu-16.04'
 
   steps:
   - checkout: none
