@@ -24,25 +24,25 @@ steps:
   #     user: olilarkin # the git username to commit with when publishing
   #     email: olilarkin@googlemail.com # the git email address to commit with when publishing
 
-  # IPlugEffect
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IPlugEffect
-      path: 'Examples'
-      graphics: ${{parameters.graphics}}
-      target: ${{parameters.target}}
-      artifactName: IPlugEffect_${{parameters.graphics}}
-      platformStr: ${{parameters.platformStr}}
+  # # IPlugEffect
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IPlugEffect
+  #     path: 'Examples'
+  #     graphics: ${{parameters.graphics}}
+  #     target: ${{parameters.target}}
+  #     artifactName: IPlugEffect_${{parameters.graphics}}
+  #     platformStr: ${{parameters.platformStr}}
 
-  #IPlugInstrument
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IPlugInstrument
-      path: 'Examples'
-      graphics: ${{parameters.graphics}}       
-      target: ${{parameters.target}}
-      artifactName: IPlugInstrument_${{parameters.graphics}}
-      platformStr: ${{parameters.platformStr}}
+  # #IPlugInstrument
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IPlugInstrument
+  #     path: 'Examples'
+  #     graphics: ${{parameters.graphics}}       
+  #     target: ${{parameters.target}}
+  #     artifactName: IPlugInstrument_${{parameters.graphics}}
+  #     platformStr: ${{parameters.platformStr}}
 
   #IPlugControls
   - template: ${{parameters.platform}}
@@ -55,33 +55,33 @@ steps:
       platformStr: ${{parameters.platformStr}}
 
   # IPlugFaustDSP
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IPlugFaustDSP
-      path: 'Examples'
-      graphics: ${{parameters.graphics}}
-      target: ${{parameters.target}}
-      artifactName: IPlugFaustDSP_${{parameters.graphics}}
-      platformStr: ${{parameters.platformStr}}
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IPlugFaustDSP
+  #     path: 'Examples'
+  #     graphics: ${{parameters.graphics}}
+  #     target: ${{parameters.target}}
+  #     artifactName: IPlugFaustDSP_${{parameters.graphics}}
+  #     platformStr: ${{parameters.platformStr}}
 
-  # IGraphicsStressTest
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IGraphicsStressTest
-      path: 'Tests'
-      graphics: ${{parameters.graphics}}
-      target: ${{parameters.target}}
-      artifactName: IGraphicsStressTest_${{parameters.graphics}}
-      platformStr: ${{parameters.platformStr}}
-      justApp: true
+  # # IGraphicsStressTest
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IGraphicsStressTest
+  #     path: 'Tests'
+  #     graphics: ${{parameters.graphics}}
+  #     target: ${{parameters.target}}
+  #     artifactName: IGraphicsStressTest_${{parameters.graphics}}
+  #     platformStr: ${{parameters.platformStr}}
+  #     justApp: true
 
-  #IGraphicsTest
-  - template: ${{parameters.platform}}
-    parameters:
-      name: IGraphicsTest
-      path: 'Tests'
-      graphics: ${{parameters.graphics}}
-      target: ${{parameters.target}}
-      artifactName: IGraphicsTest_${{parameters.graphics}}
-      platformStr: ${{parameters.platformStr}}
-      justApp: true
+  # #IGraphicsTest
+  # - template: ${{parameters.platform}}
+  #   parameters:
+  #     name: IGraphicsTest
+  #     path: 'Tests'
+  #     graphics: ${{parameters.graphics}}
+  #     target: ${{parameters.target}}
+  #     artifactName: IGraphicsTest_${{parameters.graphics}}
+  #     platformStr: ${{parameters.platformStr}}
+  #     justApp: true
