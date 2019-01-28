@@ -7,6 +7,7 @@
  steps:
   - bash: |
       rm -r $BUILD_BINARIESDIRECTORY
+      git pull origin
     displayName: Empty binaries directory
 
   - task: DownloadPipelineArtifact@0
